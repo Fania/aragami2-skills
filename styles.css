@@ -1,0 +1,17 @@
+body {
+  background-image: url("imgs/tile.png");
+}
+
+h1 {
+  text-align: center;
+}
+
+[class^="row"] {
+  display: flex;
+  justify-content: center;
+}
+
+[class^="row"] div {
+  min-width: 100px;
+  min-height: 100px;
+}
