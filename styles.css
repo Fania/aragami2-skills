@@ -6,6 +6,11 @@ h1 {
   text-align: center;
 }
 
+img {
+  width: 100px;
+  height: 100px;
+}
+
 [class^="row"] {
   display: flex;
   justify-content: center;
@@ -14,4 +19,49 @@ h1 {
 [class^="row"] div {
   min-width: 100px;
   min-height: 100px;
+}
+
+figure {
+  margin: 5px 10px;
+}
+
+figcaption {
+  display: none;
+}
+
+figure:hover figcaption {
+  display: block;
+  position: absolute;
+  padding: 7px;
+  border: 1px beige solid;
+  /* border-radius: 5px; */
+  background: rgba(0, 0, 0, 0.9);
+  bottom: 0;
+  right: 0;
+  max-width: 400px;
+  color: beige;
+}
+
+p, span {
+  color: gray;
+}
+
+span {
+  float: right;
+  padding-top: 7px;
+}
+
+h2,h3,span {
+  text-transform: uppercase;
+}
+
+h2,h3,p {
+  display: inline-block;
+  margin: 0;
+}
+h3::before {
+  content: "";
+  width: 400px;
+  display: inline-block;
+  border-top: 1px solid beige;
 }
