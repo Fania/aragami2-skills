@@ -7,6 +7,7 @@ h1 {
 }
 
 img {
+  /* box-shadow: 20px 20px 50px grey; */
   width: 100px;
   height: 100px;
 }
@@ -70,10 +71,13 @@ figure.first {
   /* box-sizing: border-box;
   border: 5px solid white; */
   background: white;
+  box-shadow: 20px 20px 50px 15px grey;
+
 }
 
 figure.second {
   /* box-sizing: border-box; */
   /* border: 5px solid yellow; */
   background: yellow;
+  box-shadow: 20px 20px 50px 15px grey;
 }
