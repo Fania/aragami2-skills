@@ -52,7 +52,7 @@ const max = {
   "Shadow Veil": [1,1]
 };
 
-const skillpoints = 30;
+let skillpoints = 30;
 
 
 const triggers = document.getElementsByTagName('figure');
@@ -62,17 +62,26 @@ const triggers = document.getElementsByTagName('figure');
     console.dir(trig);
     console.log(skill);
     console.log(max[skill]);
-    // skillpoints = skillpoints - 
-    localStorage.setItem(`aragami2-${skill}`, max[skill]);
+    // localStorage.setItem(`aragami2-${skill}`, max[skill]);
     localStorage.setItem(`aragami2-total`, skillpoints);
 
     if(trig.classList.length == 0){
       trig.classList.add("first");
+      // localStorage.setItem(`aragami2-${skill}`, max[skill][0]);
+      // skillpoints = skillpoints - max[skill][0];
+      // localStorage.setItem(`aragami2-total`, skillpoints);
     } else if(trig.classList.contains("first")){
       trig.classList.replace("first","second");
+      // localStorage.setItem(`aragami2-${skill}`, max[skill][0]+max[skill][1]);
+      // skillpoints = skillpoints - max[skill][0]+max[skill][1];
+      // localStorage.setItem(`aragami2-total`, skillpoints);
     } else if(trig.classList.contains("second")){
       trig.classList.remove("second");
+      // localStorage.removeItem(`aragami2-${skill}`);
     }
+
+    // skillpoints = skillpoints - 
+    // localStorage.setItem(`aragami2-total`, skillpoints);
 
 
   });
