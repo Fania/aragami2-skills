@@ -106,18 +106,29 @@ const triggers = document.getElementsByTagName('figure');
 
 
 
-
+loadFromStorage();
 function loadFromStorage() {
 
   Object.keys(localStorage).forEach( key => {
-    console.log(`Retrieving localStorage key: ${key} with value ${localStorage.getItem(key)}`);
+    // console.log(`Retrieving localStorage key: ${key} with value ${localStorage.getItem(key)}`);
     
-    // if(localStorage.getItem(key))
-    key
 
-    document.getElementById("numberHolder");
+    const newKey = key.replace("aragami2-","").replace(" ","");
+    console.log(newKey);
 
-    num.innerHTML = localStorage.getItem("aragami2-total");
+    if(newKey.startsWith("up-")){
+      const tmpKey = newKey.replace("up-","");
+      console.log("upgraded");
+      console.log(document.getElementById(tmpKey));
+      document.getElementById(tmpKey).classList.add("second");
+    } else {
+      console.log("normal unlocked");
+      console.log(document.getElementById(newKey));
+      // document.getElementById(newKey).classList.add("first"); // error?
+    }
+    if(newKey == "total") {
+      document.getElementById("numberHolder").innerHTML = localStorage.getItem(newKey);
+    }
 
   });
 
