@@ -113,6 +113,8 @@ function loadFromStorage() {
     console.log(`Retrieving localStorage key: ${key} with value ${localStorage.getItem(key)}`);
     
     // if(localStorage.getItem(key))
+    key
+
     document.getElementById("numberHolder");
 
     num.innerHTML = localStorage.getItem("aragami2-total");
