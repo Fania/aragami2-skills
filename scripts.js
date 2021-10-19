@@ -55,37 +55,77 @@ const max = {
 let skillpoints = 30;
 
 
+const num = document.getElementById("numberHolder");
+
+
 const triggers = document.getElementsByTagName('figure');
 [...triggers].forEach( trig => {
   trig.addEventListener('click', ()=> { 
     const skill = trig.lastElementChild.firstElementChild.innerHTML;
-    console.dir(trig);
-    console.log(skill);
-    console.log(max[skill]);
+    // console.dir(trig);
+    console.log(`Clicking on ${skill}`);
+    // console.log(max[skill]);
     // localStorage.setItem(`aragami2-${skill}`, max[skill]);
     localStorage.setItem(`aragami2-total`, skillpoints);
 
+    // FIRST CLICK
     if(trig.classList.length == 0){
       trig.classList.add("first");
-      // localStorage.setItem(`aragami2-${skill}`, max[skill][0]);
-      // skillpoints = skillpoints - max[skill][0];
-      // localStorage.setItem(`aragami2-total`, skillpoints);
-    } else if(trig.classList.contains("first")){
+      localStorage.setItem(`aragami2-${skill}`, max[skill][0]);
+      // add points to totals
+      skillpoints = skillpoints - max[skill][0];
+      console.log(`first click ${skillpoints}`);
+      localStorage.setItem(`aragami2-total`, skillpoints);
+      num.innerHTML = localStorage.getItem("aragami2-total");
+    }
+    // SECOND CLICK 
+    else if(trig.classList.contains("first")){
       trig.classList.replace("first","second");
-      // localStorage.setItem(`aragami2-${skill}`, max[skill][0]+max[skill][1]);
-      // skillpoints = skillpoints - max[skill][0]+max[skill][1];
-      // localStorage.setItem(`aragami2-total`, skillpoints);
-    } else if(trig.classList.contains("second")){
+      localStorage.setItem(`aragami2-${skill}`, max[skill][0]+max[skill][1]);
+      // add points to totals
+      skillpoints = skillpoints - max[skill][1];
+      console.log(`second click ${skillpoints}`);
+      localStorage.setItem(`aragami2-total`, skillpoints);
+      num.innerHTML = localStorage.getItem("aragami2-total");
+    } 
+    // RESET CLICK
+    else if(trig.classList.contains("second")){
       trig.classList.remove("second");
-      // localStorage.removeItem(`aragami2-${skill}`);
+      localStorage.removeItem(`aragami2-${skill}`);
+      // add points back to totals
+      skillpoints = skillpoints + max[skill][0]+max[skill][1];
+      console.log(`reset ${skillpoints}`);
+      localStorage.setItem(`aragami2-total`, skillpoints);
+      num.innerHTML = localStorage.getItem("aragami2-total");
     }
 
-    // skillpoints = skillpoints - 
-    // localStorage.setItem(`aragami2-total`, skillpoints);
-
-
+    
+    // updateTotal();
   });
 });
+
+
+
+
+function updateTotal() {
+
+  Object.keys(localStorage).forEach( key => {
+    console.log(`Retrieving localStorage key: ${key} with value ${localStorage.getItem(key)}`);
+    
+    num.innerHTML = localStorage.getItem("aragami2-total");
+
+  });
+
+  // Object.values(localStorage).forEach( value => {
+  //   console.log("value:", value);
+  // });
+
+}
+
+
+
+
+
 
 
 
