@@ -56,8 +56,6 @@ let skillpoints = 30;
 
 
 const num = document.getElementById("numberHolder");
-
-
 const triggers = document.getElementsByTagName('figure');
 [...triggers].forEach( trig => {
   trig.addEventListener('click', ()=> { 
@@ -74,17 +72,17 @@ const triggers = document.getElementsByTagName('figure');
       localStorage.setItem(`aragami2-${skill}`, max[skill][0]);
       // add points to totals
       skillpoints = skillpoints - max[skill][0];
-      console.log(`first click ${skillpoints}`);
+      // console.log(`first click ${skillpoints}`);
       localStorage.setItem(`aragami2-total`, skillpoints);
       num.innerHTML = localStorage.getItem("aragami2-total");
     }
     // SECOND CLICK 
     else if(trig.classList.contains("first")){
       trig.classList.replace("first","second");
-      localStorage.setItem(`aragami2-${skill}`, max[skill][0]+max[skill][1]);
+      localStorage.setItem(`aragami2-up-${skill}`, max[skill][1]);
       // add points to totals
       skillpoints = skillpoints - max[skill][1];
-      console.log(`second click ${skillpoints}`);
+      // console.log(`second click ${skillpoints}`);
       localStorage.setItem(`aragami2-total`, skillpoints);
       num.innerHTML = localStorage.getItem("aragami2-total");
     } 
@@ -92,17 +90,40 @@ const triggers = document.getElementsByTagName('figure');
     else if(trig.classList.contains("second")){
       trig.classList.remove("second");
       localStorage.removeItem(`aragami2-${skill}`);
+      localStorage.removeItem(`aragami2-up-${skill}`);
       // add points back to totals
       skillpoints = skillpoints + max[skill][0]+max[skill][1];
-      console.log(`reset ${skillpoints}`);
+      // console.log(`reset ${skillpoints}`);
       localStorage.setItem(`aragami2-total`, skillpoints);
       num.innerHTML = localStorage.getItem("aragami2-total");
     }
 
     
-    // updateTotal();
   });
 });
+
+
+
+
+
+
+function loadFromStorage() {
+
+  Object.keys(localStorage).forEach( key => {
+    console.log(`Retrieving localStorage key: ${key} with value ${localStorage.getItem(key)}`);
+    
+    // if(localStorage.getItem(key))
+    document.getElementById("numberHolder");
+
+    num.innerHTML = localStorage.getItem("aragami2-total");
+
+  });
+
+
+}
+
+
+
 
 
 
