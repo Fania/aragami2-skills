@@ -52,38 +52,33 @@ const max = {
   "Shadow Veil": [1,1]
 };
 
-let skillpoints = 30;
 
+let skillpoints = localStorage.getItem("aragami2-total");
+skillpoints ? null : skillpoints = 30;
 
 const num = document.getElementById("numberHolder");
 const triggers = document.getElementsByTagName('figure');
 [...triggers].forEach( trig => {
   trig.addEventListener('click', ()=> { 
     const skill = trig.lastElementChild.firstElementChild.innerHTML;
-    // console.dir(trig);
-    console.log(`Clicking on ${skill}`);
-    // console.log(max[skill]);
-    // localStorage.setItem(`aragami2-${skill}`, max[skill]);
-    localStorage.setItem(`aragami2-total`, skillpoints);
+    localStorage.setItem(`aragami2-total`, parseInt(skillpoints));
 
-    // FIRST CLICK
+    // FIRST CLICK (UNLOCKED)
     if(trig.classList.length == 0){
       trig.classList.add("first");
       localStorage.setItem(`aragami2-${skill}`, max[skill][0]);
       // add points to totals
-      skillpoints = skillpoints - max[skill][0];
-      // console.log(`first click ${skillpoints}`);
-      localStorage.setItem(`aragami2-total`, skillpoints);
+      skillpoints = parseInt(skillpoints) - max[skill][0];
+      localStorage.setItem(`aragami2-total`, parseInt(skillpoints));
       num.innerHTML = localStorage.getItem("aragami2-total");
     }
-    // SECOND CLICK 
+    // SECOND CLICK (UPGRADED)
     else if(trig.classList.contains("first")){
       trig.classList.replace("first","second");
       localStorage.setItem(`aragami2-up-${skill}`, max[skill][1]);
       // add points to totals
-      skillpoints = skillpoints - max[skill][1];
-      // console.log(`second click ${skillpoints}`);
-      localStorage.setItem(`aragami2-total`, skillpoints);
+      skillpoints = parseInt(skillpoints) - max[skill][1];
+      localStorage.setItem(`aragami2-total`, parseInt(skillpoints));
       num.innerHTML = localStorage.getItem("aragami2-total");
     } 
     // RESET CLICK
@@ -92,13 +87,12 @@ const triggers = document.getElementsByTagName('figure');
       localStorage.removeItem(`aragami2-${skill}`);
       localStorage.removeItem(`aragami2-up-${skill}`);
       // add points back to totals
-      skillpoints = skillpoints + max[skill][0]+max[skill][1];
-      // console.log(`reset ${skillpoints}`);
-      localStorage.setItem(`aragami2-total`, skillpoints);
+      skillpoints = parseInt(skillpoints) + max[skill][0]+max[skill][1];
+      localStorage.setItem(`aragami2-total`, parseInt(skillpoints));
+      num.innerHTML = "";
       num.innerHTML = localStorage.getItem("aragami2-total");
     }
 
-    
   });
 });
 
@@ -109,90 +103,28 @@ const triggers = document.getElementsByTagName('figure');
 loadFromStorage();
 function loadFromStorage() {
 
-  Object.keys(localStorage).forEach( key => {
-    // console.log(`Retrieving localStorage key: ${key} with value ${localStorage.getItem(key)}`);
-    
-
+  // loop through entries from storage
+  const skills = Object.keys(localStorage).sort(); // alphabetic sort
+  skills.forEach( key => {
     const newKey = key.replace("aragami2-","").replace(" ","");
-    console.log(newKey);
-
-    if(newKey.startsWith("up-")){
+    // FIRST CLICK (UNLOCKED)
+    if(!newKey.startsWith("up-")){
+      if(newKey != "total") {
+        document.getElementById(newKey).classList.add("first");
+      }
+    // SECOND CLICK (UPGRADED)
+    } else if(newKey.startsWith("up-")) {
       const tmpKey = newKey.replace("up-","");
-      console.log("upgraded");
-      console.log(document.getElementById(tmpKey));
-      document.getElementById(tmpKey).classList.add("second");
-    } else {
-      console.log("normal unlocked");
-      console.log(document.getElementById(newKey));
-      // document.getElementById(newKey).classList.add("first"); // error?
+      document.getElementById(tmpKey).classList.replace("first","second");
     }
+
+    // display total
     if(newKey == "total") {
-      document.getElementById("numberHolder").innerHTML = localStorage.getItem(newKey);
+      num.innerHTML = "";
+      num.innerHTML = localStorage.getItem(`aragami2-${newKey}`);
     }
 
   });
 
-
 }
 
-
-
-
-
-
-
-function updateTotal() {
-
-  Object.keys(localStorage).forEach( key => {
-    console.log(`Retrieving localStorage key: ${key} with value ${localStorage.getItem(key)}`);
-    
-    num.innerHTML = localStorage.getItem("aragami2-total");
-
-  });
-
-  // Object.values(localStorage).forEach( value => {
-  //   console.log("value:", value);
-  // });
-
-}
-
-
-
-
-
-
-
-
-
-
-/*
-ghostlyDash: 1 + 1
-pureSoul: 1 + 1
-warpStrike: 2 + 1
-toolInfusion: 1  + 1
-shadowVeil: 1 + 1
-
-shadowPull: 2 + 1
-hematophagy: 1 + 1
-dreamDevourer: 1 + 1 
-silhouette: 2 + 1
-
-momentum: 1 + 1
-rangedParry: 1 + 1 
-shadowKill: 2 + 1
-vampirism: 1 + 1
-jumper: 1 + 1
-
-mesmerize: 2 + 1 
-mirage: 1 + 1
-enhancedSenses: 1 + 1 
-wraith: 2 + 1
-
-defensiveStance: 1 + 1 
-darkFlame: 2 + 1
-divination: 1 + 1
-bloodsmoke: 2 + 1
-chameloen: 1 + 1
-
-whisper: 0 + 1
-*/
