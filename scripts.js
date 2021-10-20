@@ -1,30 +1,3 @@
-const base = {
-  "whisper": [0,0],
-  "defensiveStance": [0,0],
-  "darkFlame": [0,0],
-  "divination": [0,0],
-  "bloodsmoke": [0,0],
-  "chameleon": [0,0],
-  "mesmerize": [0,0],
-  "mirage": [0,0],
-  "enhancedSenses": [0,0],
-  "wraith": [0,0],
-  "momentum": [0,0],
-  "rangedParry": [0,0],
-  "shadowKill": [0,0],
-  "vampirism": [0,0],
-  "jumper": [0,0],
-  "shadowPull": [0,0],
-  "hematophagy": [0,0],
-  "dreamDevourer": [0,0],
-  "silhouette": [0,0],
-  "ghostlyDash": [0,0],
-  "pureSoul": [0,0],
-  "warpStrike": [0,0],
-  "toolInfusion": [0,0],
-  "shadowVeil": [0,0]
-};
-
 const max = {
   "Whisper": [0,1],
   "Defensive Stance": [1,1],

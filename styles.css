@@ -1,40 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
+
 body {
   background-image: url("imgs/tile.png");
+  /* background-image: url("imgs/cloud.png"), url("imgs/tile.png"); */
+  /* background-repeat: no-repeat, repeat;
+  background-position: bottom left, top left;
+  background-size: 300px 300px, 300px 300px; */
 }
 
 h1 {
   text-align: center;
+  font-family: 'Kaushan Script', cursive;
 }
 
 img {
-  width: 100px;
-  height: 100px;
+  width: 50px;
+  height: 50px;
 }
 
 div.footer {
   position: fixed;
   bottom: 0px;
-
 }
 
 img.cloud {
-  width: 300px;
-  height: 300px;
+  width: 200px;
+  height: 200px;
 }
 
 img.counter {
   position: absolute;
   bottom: 40px;
   left: 30px;
-  width: 100px;
-  height: 100px;
+  width: 60px;
+  height: 60px;
 }
 
 span.num {
   position: absolute;
-  bottom: 66px;
-  left: 56px;
-  font-size: 2.5em;
+  bottom: 56px;
+  left: 36px;
+  font-size: 1.5em;
   color: beige;
   text-align: center;
   width: 50px;
@@ -59,16 +65,22 @@ figcaption {
 }
 
 figure:hover figcaption {
+  box-sizing: border-box;
   display: block;
   position: absolute;
   padding: 7px;
   border: 1px beige solid;
-  /* border-radius: 5px; */
   background: rgba(0, 0, 0, 0.9);
   bottom: 0;
   right: 0;
-  max-width: 400px;
+  max-width: 97vw;
+  z-index: 9;
   color: beige;
+  margin: 5px;
+}
+
+figcaption h3 {
+  width: 95%;
 }
 
 p, span {
@@ -96,16 +108,51 @@ h3::before {
 }
 
 figure.first {
-  /* box-sizing: border-box;
-  border: 5px solid white; */
   background: white;
   box-shadow: 20px 20px 50px 15px grey;
 
 }
 
 figure.second {
-  /* box-sizing: border-box; */
-  /* border: 5px solid yellow; */
   background: yellow;
   box-shadow: 20px 20px 50px 15px grey;
+}
+
+
+@media screen and (min-width: 400px) {
+  
+  img {
+    width: 100px;
+    height: 100px;
+  }
+
+  img.cloud {
+    width: 300px;
+    height: 300px;
+  }
+
+  img.counter {
+    bottom: 40px;
+    left: 30px;
+    width: 100px;
+    height: 100px;
+  }
+
+  span.num {
+    bottom: 66px;
+    left: 56px;
+    font-size: 2.5em;
+    width: 50px;
+  }
+
+  figure:hover figcaption {
+    box-sizing: border-box;
+    padding: 7px;
+    border: 1px beige solid;
+    bottom: 0;
+    right: 0;
+    max-width: 400px;
+    margin: 5px;
+  }
+
 }
