@@ -133,22 +133,35 @@ function loadFromStorage() {
 
 
 
-disableRows();
-function disableRows() {
+// disableRows();
+// function disableRows() {
 
-  const row1 = document.querySelector(".row1");
-  const row2 = document.querySelector(".row2");
-  const row3 = document.querySelector(".row3");
-  const row4 = document.querySelector(".row4");
-  const row5 = document.querySelector(".row5");
-  const row6 = document.querySelector(".row6");
+//   const row1 = document.querySelector(".row1");
+//   const row2 = document.querySelector(".row2");
+//   const row3 = document.querySelector(".row3");
+//   const row4 = document.querySelector(".row4");
+//   const row5 = document.querySelector(".row5");
+//   const row6 = document.querySelector(".row6");
 
-  console.log(row2);
+//   console.log(row2);
 
-  
+//   let t = localStorage.getItem(`aragami2-total`);
+
+//   if( t == 30) {
+//     row6.classList.add("disable");
+//     row5.classList.add("disable");
+//     row4.classList.add("disable");
+//     row3.classList.add("disable");
+//     row2.classList.add("disable");
+//   }
+//   if( t < 30 && t > 24) {
+//     row6.classList.add("disable");
+//     row5.classList.add("disable");
+//     row4.classList.add("disable");
+//     row3.classList.add("disable");
+//   }
 
 
 
-
-}
+// }
 
