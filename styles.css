@@ -3,10 +3,6 @@
 body {
   margin: 0;
   background-image: url("imgs/tile.png");
-  /* background-image: url("imgs/cloud.png"), url("imgs/tile.png"); */
-  /* background-repeat: no-repeat, repeat;
-  background-position: bottom left, top left;
-  background-size: 300px 300px, 300px 300px; */
 }
 
 h1 {
@@ -24,7 +20,7 @@ img {
   height: 50px;
 }
 
-div.footer {
+footer {
   position: fixed;
   bottom: 0px;
   background-image: url("imgs/bar.png");
@@ -115,22 +111,17 @@ h3::before {
   border-top: 1px solid beige;
 }
 
-figure.first {
-  background: white;
-  box-shadow: 20px 20px 50px 15px grey;
-
+figure.first img {
+  filter: drop-shadow(0px 0px 10px white);
 }
 
-figure.second {
-  background: yellow;
-  box-shadow: 20px 20px 50px 15px grey;
+figure.second img {
+  filter: drop-shadow(0px 0px 10px yellow);
 }
 
 
 @media screen and (min-width: 400px) {
 
-
-  
   img {
     width: 100px;
     height: 100px;
@@ -149,12 +140,6 @@ figure.second {
     height: 100px;
   }
 
-  /* span.num {
-    bottom: 56px;
-    left: 36px;
-    font-size: 1.5em;
-  } */
-
   span.num {
     bottom: 66px;
     left: 56px;
@@ -166,7 +151,7 @@ figure.second {
     bottom: 0;
   }
 
-  div.footer {
+  footer {
     position: fixed;
     bottom: 0px;
     background-image: none;

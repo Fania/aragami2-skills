@@ -1,4 +1,4 @@
-const max = {
+const costs = {
   "Whisper": [0,1],
   "Defensive Stance": [1,1],
   "Dark Flame": [2,1],
@@ -38,29 +38,49 @@ const triggers = document.getElementsByTagName('figure');
 
     // FIRST CLICK (UNLOCKED)
     if(trig.classList.length == 0){
+      // change image
       trig.classList.add("first");
-      localStorage.setItem(`aragami2-${skill}`, max[skill][0]);
+      const old = trig.children[0].attributes.src.nodeValue;
+      const neww = old.replace("-locked","-unlocked");
+      trig.children[0].setAttribute("src",neww);
+      // add points to storage
+      localStorage.setItem(`aragami2-${skill}`, costs[skill][0]);
       // add points to totals
-      skillpoints = parseInt(skillpoints) - max[skill][0];
+      skillpoints = parseInt(skillpoints) - costs[skill][0];
       localStorage.setItem(`aragami2-total`, parseInt(skillpoints));
       num.innerHTML = localStorage.getItem("aragami2-total");
     }
     // SECOND CLICK (UPGRADED)
     else if(trig.classList.contains("first")){
+      // change image
       trig.classList.replace("first","second");
-      localStorage.setItem(`aragami2-up-${skill}`, max[skill][1]);
+      const old = trig.children[0].attributes.src.nodeValue;
+      const neww = old.replace("-unlocked","-upgraded");
+      trig.children[0].setAttribute("src",neww);
+      // add points to storage
+      localStorage.setItem(`aragami2-up-${skill}`, costs[skill][1]);
       // add points to totals
-      skillpoints = parseInt(skillpoints) - max[skill][1];
+      skillpoints = parseInt(skillpoints) - costs[skill][1];
       localStorage.setItem(`aragami2-total`, parseInt(skillpoints));
       num.innerHTML = localStorage.getItem("aragami2-total");
     } 
     // RESET CLICK
     else if(trig.classList.contains("second")){
+      // change image
       trig.classList.remove("second");
+      const old = trig.children[0].attributes.src.nodeValue;
+      let neww = "";
+      if(old.endsWith("-unlocked")) {
+        neww = old.replace("-unlocked","-locked");
+      } else {
+        neww = old.replace("-upgraded","-locked");
+      }
+      trig.children[0].setAttribute("src",neww);
+      // remove points from storage
       localStorage.removeItem(`aragami2-${skill}`);
       localStorage.removeItem(`aragami2-up-${skill}`);
       // add points back to totals
-      skillpoints = parseInt(skillpoints) + max[skill][0]+max[skill][1];
+      skillpoints = parseInt(skillpoints) + costs[skill][0]+costs[skill][1];
       localStorage.setItem(`aragami2-total`, parseInt(skillpoints));
       num.innerHTML = "";
       num.innerHTML = localStorage.getItem("aragami2-total");
@@ -80,15 +100,25 @@ function loadFromStorage() {
   const skills = Object.keys(localStorage).sort(); // alphabetic sort
   skills.forEach( key => {
     const newKey = key.replace("aragami2-","").replace(" ","");
+    const item = document.getElementById(newKey);
     // FIRST CLICK (UNLOCKED)
     if(!newKey.startsWith("up-")){
       if(newKey != "total") {
-        document.getElementById(newKey).classList.add("first");
+        item.classList.add("first");
+        // replace images
+        const old = item.children[0].attributes.src.nodeValue;
+        const neww = old.replace("-locked","-unlocked");
+        item.children[0].setAttribute("src",neww);
       }
     // SECOND CLICK (UPGRADED)
     } else if(newKey.startsWith("up-")) {
       const tmpKey = newKey.replace("up-","");
-      document.getElementById(tmpKey).classList.replace("first","second");
+      const tmpitem = document.getElementById(tmpKey);
+      tmpitem.classList.replace("first","second");
+      // replace images
+      const old = tmpitem.children[0].attributes.src.nodeValue;
+      const neww = old.replace("-unlocked","-upgraded");
+      tmpitem.children[0].setAttribute("src",neww);
     }
 
     // display total
@@ -98,6 +128,27 @@ function loadFromStorage() {
     }
 
   });
+
+}
+
+
+
+disableRows();
+function disableRows() {
+
+  const row1 = document.querySelector(".row1");
+  const row2 = document.querySelector(".row2");
+  const row3 = document.querySelector(".row3");
+  const row4 = document.querySelector(".row4");
+  const row5 = document.querySelector(".row5");
+  const row6 = document.querySelector(".row6");
+
+  console.log(row2);
+
+  
+
+
+
 
 }
 
