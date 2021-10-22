@@ -41,7 +41,7 @@ const triggers = document.getElementsByTagName('figure');
       // change image
       trig.classList.add("first");
       const old = trig.children[0].attributes.src.nodeValue;
-      const neww = old.replace("-locked","-unlocked");
+      const neww = old.replace("-locked","-selected");
       trig.children[0].setAttribute("src",neww);
       // add points to storage
       localStorage.setItem(`aragami2-${skill}`, costs[skill][0]);
@@ -55,7 +55,7 @@ const triggers = document.getElementsByTagName('figure');
       // change image
       trig.classList.replace("first","second");
       const old = trig.children[0].attributes.src.nodeValue;
-      const neww = old.replace("-unlocked","-upgraded");
+      const neww = old.replace("-selected","-upgraded");
       trig.children[0].setAttribute("src",neww);
       // add points to storage
       localStorage.setItem(`aragami2-up-${skill}`, costs[skill][1]);
@@ -70,8 +70,8 @@ const triggers = document.getElementsByTagName('figure');
       trig.classList.remove("second");
       const old = trig.children[0].attributes.src.nodeValue;
       let neww = "";
-      if(old.endsWith("-unlocked")) {
-        neww = old.replace("-unlocked","-locked");
+      if(old.endsWith("-selected")) {
+        neww = old.replace("-selected","-locked");
       } else {
         neww = old.replace("-upgraded","-locked");
       }
@@ -107,7 +107,7 @@ function loadFromStorage() {
         item.classList.add("first");
         // replace images
         const old = item.children[0].attributes.src.nodeValue;
-        const neww = old.replace("-locked","-unlocked");
+        const neww = old.replace("-locked","-selected");
         item.children[0].setAttribute("src",neww);
       }
     // SECOND CLICK (UPGRADED)
@@ -117,7 +117,7 @@ function loadFromStorage() {
       tmpitem.classList.replace("first","second");
       // replace images
       const old = tmpitem.children[0].attributes.src.nodeValue;
-      const neww = old.replace("-unlocked","-upgraded");
+      const neww = old.replace("-selected","-upgraded");
       tmpitem.children[0].setAttribute("src",neww);
     }
 
@@ -129,39 +129,61 @@ function loadFromStorage() {
 
   });
 
+  // disableRows();
 }
 
 
 
-// disableRows();
-// function disableRows() {
+// disableRows(localStorage.getItem(`aragami2-total`));
+function disableRows(currentTotal) {
 
-//   const row1 = document.querySelector(".row1");
-//   const row2 = document.querySelector(".row2");
-//   const row3 = document.querySelector(".row3");
-//   const row4 = document.querySelector(".row4");
-//   const row5 = document.querySelector(".row5");
-//   const row6 = document.querySelector(".row6");
+  const row1 = document.querySelector(".row1");
+  const row2 = document.querySelector(".row2");
+  const row3 = document.querySelector(".row3");
+  const row4 = document.querySelector(".row4");
+  const row5 = document.querySelector(".row5");
+  const row6 = document.querySelector(".row6");
 
-//   console.log(row2);
+  console.log(row2);
+  console.log(currentTotal);
 
-//   let t = localStorage.getItem(`aragami2-total`);
+  // let t = localStorage.getItem(`aragami2-total`);
 
-//   if( t == 30) {
-//     row6.classList.add("disable");
-//     row5.classList.add("disable");
-//     row4.classList.add("disable");
-//     row3.classList.add("disable");
-//     row2.classList.add("disable");
-//   }
-//   if( t < 30 && t > 24) {
-//     row6.classList.add("disable");
-//     row5.classList.add("disable");
-//     row4.classList.add("disable");
-//     row3.classList.add("disable");
-//   }
+  if( currentTotal == 30) {
+    row6.classList.add("disable");
+    row5.classList.add("disable");
+    row4.classList.add("disable");
+    row3.classList.add("disable");
+    row2.classList.add("disable");
+    // disableRows();
+  }
+  console.log(row1.children[0].classList);
+  if(row1.children[0].classList.contains("first") || 
+     row1.children[0].classList.contains("second")) {
+    row6.classList.add("disable");
+    row5.classList.add("disable");
+    row4.classList.add("disable");
+    row3.classList.add("disable");
+    row2.classList.remove("disable");
+    // disableRows(currentTotal);
+  }
+  if( currentTotal < 30 && currentTotal >= 25) {
+    row6.classList.add("disable");
+    row5.classList.add("disable");
+    row4.classList.add("disable");
+    row3.classList.remove("disable");
+    row2.classList.remove("disable");
+    // disableRows();
+  }
 
+  // if( currentTotal < 25 && currentTotal >= 20) {
+  //   row6.classList.add("disable");
+  //   row5.classList.add("disable");
+  //   row4.classList.remove("disable");
+  //   row3.classList.remove("disable");
+  //   row2.classList.remove("disable");
+  //   // disableRows();
+  // }
 
-
-// }
+}
 
