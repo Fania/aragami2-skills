@@ -144,6 +144,41 @@ function disableRows(currentTotal) {
   const row5 = document.querySelector(".row5");
   const row6 = document.querySelector(".row6");
 
+  const wh = document.querySelector("#Whisper");
+
+  const ds = document.querySelector("#DefensiveStance");
+  const df = document.querySelector("#DarkFlame");
+  const dv = document.querySelector("#Divination");
+  const bs = document.querySelector("#Bloodsmoke");
+  const ch = document.querySelector("#Chameleon");
+
+  const mz = document.querySelector("#Mesmerize");
+  const mr = document.querySelector("#Mirage");
+  const es = document.querySelector("#EnhancedSenses");
+  const wr = document.querySelector("#Wraith");
+
+  const mt = document.querySelector("#Momentum");
+  const rp = document.querySelector("#RangedParry");
+  const sk = document.querySelector("#ShadowKill");
+  const vp = document.querySelector("#Vampirism");
+  const jp = document.querySelector("#Jumper");
+
+  const sp = document.querySelector("#ShadowPull");
+  const hp = document.querySelector("#Hematophagy");
+  const dd = document.querySelector("#DreamDevourer");
+  const st = document.querySelector("#Silhouette");
+
+  const gd = document.querySelector("#GhostlyDash");
+  const ps = document.querySelector("#PureSoul");
+  const ws = document.querySelector("#WarpStrike");
+  const ti = document.querySelector("#ToolInfusion");
+  const sv = document.querySelector("#ShadowVeil");
+
+
+
+
+
+
   console.log(row2);
   console.log(currentTotal);
 
