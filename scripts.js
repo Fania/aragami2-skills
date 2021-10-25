@@ -1,5 +1,5 @@
 const costs = {
-  "Whisper": [0,1],
+  "Whisper": [1,1],
   "Defensive Stance": [1,1],
   "Dark Flame": [2,1],
   "Divination": [1,1],
@@ -134,91 +134,135 @@ function loadFromStorage() {
 
 
 
-// disableRows(localStorage.getItem(`aragami2-total`));
-function disableRows(currentTotal) {
-
-  const row1 = document.querySelector(".row1");
-  const row2 = document.querySelector(".row2");
-  const row3 = document.querySelector(".row3");
-  const row4 = document.querySelector(".row4");
-  const row5 = document.querySelector(".row5");
-  const row6 = document.querySelector(".row6");
-
-  const wh = document.querySelector("#Whisper");
-
-  const ds = document.querySelector("#DefensiveStance");
-  const df = document.querySelector("#DarkFlame");
-  const dv = document.querySelector("#Divination");
-  const bs = document.querySelector("#Bloodsmoke");
-  const ch = document.querySelector("#Chameleon");
-
-  const mz = document.querySelector("#Mesmerize");
-  const mr = document.querySelector("#Mirage");
-  const es = document.querySelector("#EnhancedSenses");
-  const wr = document.querySelector("#Wraith");
-
-  const mt = document.querySelector("#Momentum");
-  const rp = document.querySelector("#RangedParry");
-  const sk = document.querySelector("#ShadowKill");
-  const vp = document.querySelector("#Vampirism");
-  const jp = document.querySelector("#Jumper");
-
-  const sp = document.querySelector("#ShadowPull");
-  const hp = document.querySelector("#Hematophagy");
-  const dd = document.querySelector("#DreamDevourer");
-  const st = document.querySelector("#Silhouette");
-
-  const gd = document.querySelector("#GhostlyDash");
-  const ps = document.querySelector("#PureSoul");
-  const ws = document.querySelector("#WarpStrike");
-  const ti = document.querySelector("#ToolInfusion");
-  const sv = document.querySelector("#ShadowVeil");
+const row1 = document.querySelector(".row1");
+const row2 = document.querySelector(".row2");
+const row3 = document.querySelector(".row3");
+const row4 = document.querySelector(".row4");
+const row5 = document.querySelector(".row5");
+const row6 = document.querySelector(".row6");
+// disableRows(localStorage.getItem(`aragami2-total`),[row2,row3,row4,row5,row6]);
+function disableRows(currentTotal,rows) {
 
 
-
-
-
-
-  console.log(row2);
-  console.log(currentTotal);
-
-  // let t = localStorage.getItem(`aragami2-total`);
-
-  if( currentTotal == 30) {
-    row6.classList.add("disable");
-    row5.classList.add("disable");
-    row4.classList.add("disable");
-    row3.classList.add("disable");
-    row2.classList.add("disable");
-    // disableRows();
-  }
-  console.log(row1.children[0].classList);
-  if(row1.children[0].classList.contains("first") || 
-     row1.children[0].classList.contains("second")) {
-    row6.classList.add("disable");
-    row5.classList.add("disable");
-    row4.classList.add("disable");
-    row3.classList.add("disable");
-    row2.classList.remove("disable");
-    // disableRows(currentTotal);
-  }
-  if( currentTotal < 30 && currentTotal >= 25) {
-    row6.classList.add("disable");
-    row5.classList.add("disable");
-    row4.classList.add("disable");
-    row3.classList.remove("disable");
-    row2.classList.remove("disable");
-    // disableRows();
-  }
-
-  // if( currentTotal < 25 && currentTotal >= 20) {
-  //   row6.classList.add("disable");
-  //   row5.classList.add("disable");
-  //   row4.classList.remove("disable");
-  //   row3.classList.remove("disable");
-  //   row2.classList.remove("disable");
-  //   // disableRows();
+  // while(currentTotal != 0) {
+  //   disableRows(currentTotal)
   // }
 
+  console.log(row2);
+  console.log(rows);
+  console.log(currentTotal);
+
+  if( currentTotal == 30) {
+    rows.forEach(r => r.classList.add("disable"));
+    // row6.classList.add("disable");
+    // row5.classList.add("disable");
+    // row4.classList.add("disable");
+    // row3.classList.add("disable");
+    // row2.classList.add("disable");
+    // disableRows();
+    // location.reload();
+  }
+  // minimum 29
+  if( currentTotal < 30 && currentTotal >= 25) {
+    // row6.classList.add("disable");
+    // row5.classList.add("disable");
+    // row4.classList.add("disable");
+    // row3.classList.add("disable");
+    rows.forEach(r => r.classList.add("disable"));
+    row2.classList.remove("disable");
+    // location.reload();
+
+    // disableRows(currentTotal,[row3,row4,row5,row6]);
+    // disableRows();
+  }
+  // minimum 25
+  if( currentTotal < 25 && currentTotal >= 21) {
+    rows.forEach(r => r.classList.add("disable"));
+    // row6.classList.add("disable");
+    // row5.classList.add("disable");
+    // row4.classList.add("disable");
+    row3.classList.remove("disable");
+    row2.classList.remove("disable");
+    // location.reload();
+    // disableRows();
+  }
+  // minimum 21
+  if( currentTotal < 21 && currentTotal >= 17) {
+    rows.forEach(r => r.classList.add("disable"));
+    // row6.classList.add("disable");
+    // row5.classList.add("disable");
+    row4.classList.remove("disable");
+    row3.classList.remove("disable");
+    row2.classList.remove("disable");
+    // location.reload();
+    // disableRows();
+  }
+  // minimum 17
+  if( currentTotal < 17 && currentTotal >= 13) {
+    rows.forEach(r => r.classList.add("disable"));
+    // row6.classList.add("disable");
+    row5.classList.remove("disable");
+    row4.classList.remove("disable");
+    row3.classList.remove("disable");
+    row2.classList.remove("disable");
+    // location.reload();
+    // disableRows();
+  }
+  // minimum 13
+  if( currentTotal < 13) {
+    rows.forEach(r => r.classList.add("disable"));
+    row6.classList.remove("disable");
+    row5.classList.remove("disable");
+    row4.classList.remove("disable");
+    row3.classList.remove("disable");
+    row2.classList.remove("disable");
+    // location.reload();
+    // disableRows();
+  }
+  // location.reload();
 }
 
+
+ // console.log(row1.children[0].classList);
+  // if(row1.children[0].classList.contains("first") || 
+  //    row1.children[0].classList.contains("second")) {
+  //   row6.classList.add("disable");
+  //   row5.classList.add("disable");
+  //   row4.classList.add("disable");
+  //   row3.classList.add("disable");
+  //   row2.classList.remove("disable");
+  //   // disableRows(currentTotal);
+  // }
+
+
+
+
+  // const wh = document.querySelector("#Whisper");
+
+  // const ds = document.querySelector("#DefensiveStance");
+  // const df = document.querySelector("#DarkFlame");
+  // const dv = document.querySelector("#Divination");
+  // const bs = document.querySelector("#Bloodsmoke");
+  // const ch = document.querySelector("#Chameleon");
+
+  // const mz = document.querySelector("#Mesmerize");
+  // const mr = document.querySelector("#Mirage");
+  // const es = document.querySelector("#EnhancedSenses");
+  // const wr = document.querySelector("#Wraith");
+
+  // const mt = document.querySelector("#Momentum");
+  // const rp = document.querySelector("#RangedParry");
+  // const sk = document.querySelector("#ShadowKill");
+  // const vp = document.querySelector("#Vampirism");
+  // const jp = document.querySelector("#Jumper");
+
+  // const sp = document.querySelector("#ShadowPull");
+  // const hp = document.querySelector("#Hematophagy");
+  // const dd = document.querySelector("#DreamDevourer");
+  // const st = document.querySelector("#Silhouette");
+
+  // const gd = document.querySelector("#GhostlyDash");
+  // const ps = document.querySelector("#PureSoul");
+  // const ws = document.querySelector("#WarpStrike");
+  // const ti = document.querySelector("#ToolInfusion");
+  // const sv = document.querySelector("#ShadowVeil");
