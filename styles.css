@@ -20,7 +20,13 @@ img {
   height: 50px;
 }
 
+.row1 {
+  position: relative;
+  z-index: 999;
+}
+
 footer {
+  z-index: 0;
   position: fixed;
   bottom: 0px;
   background-image: url("imgs/bar.png");
@@ -30,6 +36,12 @@ footer {
 
 img.cloud {
   display: none;
+  float: left;
+}
+
+img.cloud2 {
+  display: none;
+  float: right;
 }
 
 img.counter {
@@ -71,7 +83,7 @@ figcaption {
 figure:hover figcaption {
   box-sizing: border-box;
   display: block;
-  position: absolute;
+  position: fixed;
   padding: 7px;
   border: 1px beige solid;
   background: rgba(0, 0, 0, 0.9);
@@ -139,6 +151,12 @@ figure.second img {
     height: 300px;
   }
 
+  img.cloud2 {
+    display: block;
+    width: 300px;
+    height: 300px;
+  }
+
   img.counter {
     bottom: 40px;
     left: 30px;
@@ -161,7 +179,7 @@ figure.second img {
     position: fixed;
     bottom: 0px;
     background-image: none;
-    width: unset;
+    /* width: unset; */
     height: unset;
   }
 

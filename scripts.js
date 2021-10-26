@@ -26,6 +26,15 @@ const costs = {
 };
 
 
+const row1 = document.querySelector(".row1");
+const row2 = document.querySelector(".row2");
+const row3 = document.querySelector(".row3");
+const row4 = document.querySelector(".row4");
+const row5 = document.querySelector(".row5");
+const row6 = document.querySelector(".row6");
+
+
+
 let skillpoints = localStorage.getItem("aragami2-total");
 skillpoints ? null : skillpoints = 30;
 
@@ -86,6 +95,8 @@ const triggers = document.getElementsByTagName('figure');
       num.innerHTML = localStorage.getItem("aragami2-total");
     }
 
+    disableRows(localStorage.getItem(`aragami2-total`),[row2,row3,row4,row5,row6]);
+
   });
 });
 
@@ -129,86 +140,65 @@ function loadFromStorage() {
 
   });
 
-  // disableRows();
 }
 
 
 
-const row1 = document.querySelector(".row1");
-const row2 = document.querySelector(".row2");
-const row3 = document.querySelector(".row3");
-const row4 = document.querySelector(".row4");
-const row5 = document.querySelector(".row5");
-const row6 = document.querySelector(".row6");
-// disableRows(localStorage.getItem(`aragami2-total`),[row2,row3,row4,row5,row6]);
+
+disableRows(localStorage.getItem(`aragami2-total`),[row2,row3,row4,row5,row6]);
 function disableRows(currentTotal,rows) {
-
-
-  // while(currentTotal != 0) {
-  //   disableRows(currentTotal)
-  // }
-
-  console.log(row2);
-  console.log(rows);
-  console.log(currentTotal);
 
   if( currentTotal == 30) {
     rows.forEach(r => r.classList.add("disable"));
-    // row6.classList.add("disable");
-    // row5.classList.add("disable");
-    // row4.classList.add("disable");
-    // row3.classList.add("disable");
-    // row2.classList.add("disable");
-    // disableRows();
-    // location.reload();
-  }
+    currentTotal = parseInt(localStorage.getItem(`aragami2-total`));
+    console.log("equal 30", currentTotal);
+  } 
   // minimum 29
-  if( currentTotal < 30 && currentTotal >= 25) {
-    // row6.classList.add("disable");
-    // row5.classList.add("disable");
-    // row4.classList.add("disable");
-    // row3.classList.add("disable");
+  if( currentTotal < 30 && currentTotal >= 28) {
     rows.forEach(r => r.classList.add("disable"));
     row2.classList.remove("disable");
-    // location.reload();
-
-    // disableRows(currentTotal,[row3,row4,row5,row6]);
-    // disableRows();
+    currentTotal = parseInt(localStorage.getItem(`aragami2-total`));
+    console.log("less 30, greater 28", currentTotal);
   }
   // minimum 25
-  if( currentTotal < 25 && currentTotal >= 21) {
+  if( currentTotal < 28 && currentTotal >= 25) {
     rows.forEach(r => r.classList.add("disable"));
-    // row6.classList.add("disable");
-    // row5.classList.add("disable");
-    // row4.classList.add("disable");
     row3.classList.remove("disable");
     row2.classList.remove("disable");
-    // location.reload();
-    // disableRows();
+    currentTotal = parseInt(localStorage.getItem(`aragami2-total`));
+    console.log("less 28, greater 25", currentTotal);
   }
   // minimum 21
-  if( currentTotal < 21 && currentTotal >= 17) {
+  if( currentTotal < 25 && currentTotal >= 21) {
     rows.forEach(r => r.classList.add("disable"));
-    // row6.classList.add("disable");
-    // row5.classList.add("disable");
     row4.classList.remove("disable");
     row3.classList.remove("disable");
     row2.classList.remove("disable");
-    // location.reload();
-    // disableRows();
+    currentTotal = parseInt(localStorage.getItem(`aragami2-total`));
+    console.log("less 25, greater 21", currentTotal);
   }
   // minimum 17
-  if( currentTotal < 17 && currentTotal >= 13) {
+  if( currentTotal < 21 && currentTotal >= 17) {
     rows.forEach(r => r.classList.add("disable"));
-    // row6.classList.add("disable");
     row5.classList.remove("disable");
     row4.classList.remove("disable");
     row3.classList.remove("disable");
     row2.classList.remove("disable");
-    // location.reload();
-    // disableRows();
+    currentTotal = parseInt(localStorage.getItem(`aragami2-total`));
+    console.log("less 21, greater 17", currentTotal);
   }
   // minimum 13
+  if( currentTotal < 17 && currentTotal >= 13) {
+    rows.forEach(r => r.classList.add("disable"));
+    row6.classList.remove("disable");
+    row5.classList.remove("disable");
+    row4.classList.remove("disable");
+    row3.classList.remove("disable");
+    row2.classList.remove("disable");
+    currentTotal = parseInt(localStorage.getItem(`aragami2-total`));
+    console.log("less 17, greater 13", currentTotal);
+  }
+  // beyond
   if( currentTotal < 13) {
     rows.forEach(r => r.classList.add("disable"));
     row6.classList.remove("disable");
@@ -216,10 +206,16 @@ function disableRows(currentTotal,rows) {
     row4.classList.remove("disable");
     row3.classList.remove("disable");
     row2.classList.remove("disable");
-    // location.reload();
-    // disableRows();
+    currentTotal = parseInt(localStorage.getItem(`aragami2-total`));
+    console.log("less 13", currentTotal);
   }
-  // location.reload();
+  // if( currentTotal == 0) {
+  //   rows.forEach(r => r.classList.add("disable"));
+  //   row1.classList.add("disable");
+  //   currentTotal = parseInt(localStorage.getItem(`aragami2-total`));
+  //   console.log("equals 0", currentTotal);
+  // }
+
 }
 
 
