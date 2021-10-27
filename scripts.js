@@ -38,13 +38,20 @@ const row6 = document.querySelector(".row6");
 let skillpoints = localStorage.getItem("aragami2-total");
 skillpoints ? null : skillpoints = 30;
 
+
+const resetButton = document.getElementById('resetButton');
+resetButton.addEventListener('click', ()=> { 
+  localStorage.clear();
+  location.reload();
+});
+
+
 const num = document.getElementById("numberHolder");
 const triggers = document.getElementsByTagName('figure');
 [...triggers].forEach( trig => {
   trig.addEventListener('click', ()=> { 
     const skill = trig.lastElementChild.firstElementChild.innerHTML;
     localStorage.setItem(`aragami2-total`, parseInt(skillpoints));
-
     // FIRST CLICK (UNLOCKED)
     if(trig.classList.length == 0){
       // change image
@@ -94,9 +101,7 @@ const triggers = document.getElementsByTagName('figure');
       num.innerHTML = "";
       num.innerHTML = localStorage.getItem("aragami2-total");
     }
-
     disableRows(localStorage.getItem(`aragami2-total`),[row2,row3,row4,row5,row6]);
-
   });
 });
 
@@ -106,7 +111,6 @@ const triggers = document.getElementsByTagName('figure');
 
 loadFromStorage();
 function loadFromStorage() {
-
   // loop through entries from storage
   const skills = Object.keys(localStorage).sort(); // alphabetic sort
   skills.forEach( key => {
@@ -131,15 +135,12 @@ function loadFromStorage() {
       const neww = old.replace("-selected","-upgraded");
       tmpitem.children[0].setAttribute("src",neww);
     }
-
     // display total
     if(newKey == "total") {
       num.innerHTML = "";
       num.innerHTML = localStorage.getItem(`aragami2-${newKey}`);
     }
-
   });
-
 }
 
 
@@ -172,7 +173,6 @@ function disableRows(currentTotal,rows) {
   if( currentTotal < 30 && currentTotal >= 28) {
     rows.forEach(r => r.classList.add("disable"));
     row2.classList.remove("disable");
-    [...row2.children].forEach(ch => replaceImgs("enable",ch));
     [...row2.children].forEach(ch => replaceImgs("enable",ch));
 
 
@@ -217,7 +217,8 @@ function disableRows(currentTotal,rows) {
     // console.log("less 21, greater 17", currentTotal);
   }
   // minimum 13
-  if( currentTotal < 17 && currentTotal >= 13) {
+  // if( currentTotal < 17 && currentTotal >= 13) {
+  if( currentTotal < 17) {
     rows.forEach(r => r.classList.add("disable"));
     row6.classList.remove("disable");
     row5.classList.remove("disable");
@@ -232,43 +233,13 @@ function disableRows(currentTotal,rows) {
     currentTotal = parseInt(localStorage.getItem(`aragami2-total`));
     // console.log("less 17, greater 13", currentTotal);
   }
-  // beyond
-  if( currentTotal < 13) {
-    rows.forEach(r => r.classList.add("disable"));
-    row6.classList.remove("disable");
-    row5.classList.remove("disable");
-    row4.classList.remove("disable");
-    row3.classList.remove("disable");
-    row2.classList.remove("disable");
-    [...row6.children].forEach(ch => replaceImgs("enable",ch));
-    [...row5.children].forEach(ch => replaceImgs("enable",ch));
-    [...row4.children].forEach(ch => replaceImgs("enable",ch));
-    [...row3.children].forEach(ch => replaceImgs("enable",ch));
-    [...row2.children].forEach(ch => replaceImgs("enable",ch));
-    currentTotal = parseInt(localStorage.getItem(`aragami2-total`));
-    // console.log("less 13", currentTotal);
-  }
   // if( currentTotal == 0) {
   //   rows.forEach(r => r.classList.add("disable"));
   //   row1.classList.add("disable");
   //   currentTotal = parseInt(localStorage.getItem(`aragami2-total`));
   //   console.log("equals 0", currentTotal);
   // }
-
 }
-
-
- // console.log(row1.children[0].classList);
-  // if(row1.children[0].classList.contains("first") || 
-  //    row1.children[0].classList.contains("second")) {
-  //   row6.classList.add("disable");
-  //   row5.classList.add("disable");
-  //   row4.classList.add("disable");
-  //   row3.classList.add("disable");
-  //   row2.classList.remove("disable");
-  //   // disableRows(currentTotal);
-  // }
-
 
 
 

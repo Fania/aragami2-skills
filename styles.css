@@ -50,8 +50,9 @@ img.counter {
 
 span.num {
   position: absolute;
-  bottom: 20px;
-  right: 25px;
+  font-family: 'Kaushan Script', cursive;
+  bottom: 17px;
+  right: 27px;
   font-size: 1.5em;
   color: beige;
   text-align: center;
@@ -123,6 +124,7 @@ h3::before {
 
 button.share, button.reset {
   position: absolute;
+  font-family: 'Kaushan Script', cursive;
   border: none;
   padding: 10px 20px;
   text-align: center;
@@ -185,6 +187,7 @@ figure.second img {
     display: block;
     width: 500px;
     height: 500px;
+    
   }
 
   img.counter {
@@ -195,8 +198,8 @@ figure.second img {
   }
 
   span.num {
-    bottom: 66px;
-    left: 56px;
+    bottom: 62px;
+    left: 51px;
     font-size: 2.5em;
   }
 
