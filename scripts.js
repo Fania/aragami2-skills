@@ -33,6 +33,32 @@ const row4 = document.querySelector(".row4");
 const row5 = document.querySelector(".row5");
 const row6 = document.querySelector(".row6");
 
+const num = document.getElementById("numberHolder");
+
+
+
+
+// FIRST LOAD
+const params = location.search;
+if(params) { loadBookmark(params); }
+
+function loadBookmark(params) {
+  const keyValueStrings = (params.slice(1)).split('&');
+  const settings = {};
+  keyValueStrings.forEach(x => {
+    const pair = x.split('=');
+    let name = pair[0].replace('+',' ');
+    let value = pair[1].replace('%23','#');
+    settings[name] = value;
+    localStorage.setItem(name,value);
+  });
+  loadFromStorage();
+}
+
+
+
+
+
 
 
 let skillpoints = localStorage.getItem("aragami2-total");
@@ -42,11 +68,12 @@ skillpoints ? null : skillpoints = 30;
 const resetButton = document.getElementById('resetButton');
 resetButton.addEventListener('click', ()=> { 
   localStorage.clear();
+  location.search = "";
+  // console.log(location.url.toString());
   location.reload();
 });
 
 
-const num = document.getElementById("numberHolder");
 const triggers = document.getElementsByTagName('figure');
 [...triggers].forEach( trig => {
   trig.addEventListener('click', ()=> { 
@@ -154,7 +181,7 @@ function replaceImgs(status, item) {
     neww = old.replace("-unlocked","-locked");
   }
 
-  console.log(item.children[0].classList);
+  // console.log(item.children[0].classList);
   item.children[0].setAttribute("src",neww);
 }
 
@@ -272,3 +299,37 @@ function disableRows(currentTotal,rows) {
   // const ws = document.querySelector("#WarpStrike");
   // const ti = document.querySelector("#ToolInfusion");
   // const sv = document.querySelector("#ShadowVeil");
+
+
+
+
+
+// SHARE OPTION
+const shareButton = document.getElementById('shareButton');
+shareButton.addEventListener('click', ()=> { 
+
+  const skills = Object.keys(localStorage).sort(); // alphabetic sort
+  const params = new URLSearchParams();
+  skills.forEach( key => {
+    params.append(key,localStorage.getItem(key));
+  });
+  console.log(params.toString());
+  const bookmark = location.origin + '?' + params.toString();
+
+  if (navigator.share) {
+    navigator.share({
+      title: 'fania.github.io/aragami2-skills',
+      text: 'A2 Skills',
+      url: bookmark,
+    })
+    .then(() => console.log('Successful share'))
+    .catch((error) => console.log('Error sharing', error));
+  } else { console.log('no sharing possible'); }
+
+  location = bookmark;
+
+});
+
+
+
+
