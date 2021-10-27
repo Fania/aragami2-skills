@@ -20,11 +20,6 @@ img {
   height: 50px;
 }
 
-.row1 {
-  position: relative;
-  z-index: 999;
-}
-
 footer {
   z-index: 0;
   position: fixed;
@@ -32,16 +27,17 @@ footer {
   background-image: url("imgs/bar.png");
   width: 100%;
   height: 66px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 
 img.cloud {
   display: none;
-  float: left;
 }
 
-img.cloud2 {
+img.figure {
   display: none;
-  float: right;
 }
 
 img.counter {
@@ -65,6 +61,8 @@ span.num {
 [class^="row"] {
   display: flex;
   justify-content: center;
+  position: relative;
+  z-index: 999;
 }
 
 [class^="row"] div {
@@ -123,6 +121,38 @@ h3::before {
   border-top: 1px solid beige;
 }
 
+button.share, button.reset {
+  position: absolute;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1em;
+  margin: 0;
+  cursor: pointer;
+  z-index: 666;
+  /* background-image: url("imgs/ornament.png"), url("imgs/ornamentInverse.png");
+  background-position: top, bottom;
+  background-size: 50% 50%; */
+}
+
+button.share:hover {
+  background-color: #EAFAF1;
+}
+button.reset:hover {
+  background-color: #FDEDEC;
+}
+
+button.share {
+  bottom: 15px;
+  left: 20px;
+}
+button.reset {
+  bottom: 15px;
+  right: 40%;
+}
+
 figure.first img {
   filter: drop-shadow(0px 0px 10px white);
 }
@@ -151,10 +181,10 @@ figure.second img {
     height: 300px;
   }
 
-  img.cloud2 {
+  img.figure {
     display: block;
-    width: 300px;
-    height: 300px;
+    width: 500px;
+    height: 500px;
   }
 
   img.counter {
@@ -182,5 +212,17 @@ figure.second img {
     /* width: unset; */
     height: unset;
   }
+
+  button.share {
+    top: 10px;
+    left: 20px;
+    bottom: unset;
+  }
+  button.reset {
+    top: 10px;
+    right: 20px;
+    bottom: unset;
+  }
+
 
 }
