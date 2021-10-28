@@ -313,8 +313,9 @@ shareButton.addEventListener('click', ()=> {
   skills.forEach( key => {
     params.append(key,localStorage.getItem(key));
   });
-  console.log(params.toString());
-  const bookmark = location.origin + '?' + params.toString();
+  // console.log(params.toString());
+  // console.log(location.origin + location.pathname);
+  const bookmark = location.origin + location.pathname + '?' + params.toString();
 
   if (navigator.share) {
     navigator.share({
