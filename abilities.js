@@ -1,3 +1,199 @@
+const abilities = {
+  "Whisper": {
+    "name": "Whisper",
+    "locked": false,
+    "selected": false,
+    "upgraded": false,
+    "cost": [1,1],
+    "row": 1
+  },
+  "DefensiveStance": {
+    "name": "Defensive Stance",
+    "locked": true,
+    "selected": false,
+    "upgraded": false,
+    "cost": [1,1],
+    "row": 2
+  },
+  "DarkFlame": {
+    "name": "Dark Flame",
+    "locked": true,
+    "selected": false,
+    "upgraded": false,
+    "cost": [2,1],
+    "row": 2
+  },
+  "Divination": {
+    "name": "Divination",
+    "locked": true,
+    "selected": false,
+    "upgraded": false,
+    "cost": [1,1],
+    "row": 2
+  },
+  "Bloodsmoke": {
+    "name": "Bloodsmoke",
+    "locked": true,
+    "selected": false,
+    "upgraded": false,
+    "cost": [2,1],
+    "row": 2
+  },
+  "Chameleon": {
+    "name": "Chameleon",
+    "locked": true,
+    "selected": false,
+    "upgraded": false,
+    "cost": [1,1],
+    "row": 2
+  },
+  "Mesmerize": {
+    "name": "Mesmerize",
+    "locked": true,
+    "selected": false,
+    "upgraded": false,
+    "cost": [2,1],
+    "row": 3
+  },
+  "Mirage": {
+    "name": "Mirage",
+    "locked": true,
+    "selected": false,
+    "upgraded": false,
+    "cost": [1,1],
+    "row": 3
+  },
+  "EnhancedSenses": {
+    "name": "Enhanced Senses",
+    "locked": true,
+    "selected": false,
+    "upgraded": false,
+    "cost": [1,1],
+    "row": 3
+  },
+  "Wraith": {
+    "name": "Wraith",
+    "locked": true,
+    "selected": false,
+    "upgraded": false,
+    "cost": [2,1],
+    "row": 3
+  },
+  "Momentum": {
+    "name": "Momentum",
+    "locked": true,
+    "selected": false,
+    "upgraded": false,
+    "cost": [1,1],
+    "row": 3
+  },
+  "RangedParry": {
+    "name": "Ranged Parry",
+    "locked": true,
+    "selected": false,
+    "upgraded": false,
+    "cost": [1,1],
+    "row": 4
+  },
+  "ShadowKill": {
+    "name": "Shadow Kill",
+    "locked": true,
+    "selected": false,
+    "upgraded": false,
+    "cost": [2,1],
+    "row": 4
+  },
+  "Vampirism": {
+    "name": "Vampirism",
+    "locked": true,
+    "selected": false,
+    "upgraded": false,
+    "cost": [1,1],
+    "row": 4
+  },
+  "Jumper": {
+    "name": "Jumper",
+    "locked": true,
+    "selected": false,
+    "upgraded": false,
+    "cost": [1,1],
+    "row": 4
+  },
+  "ShadowPull": {
+    "name": "Shadow Pull",
+    "locked": true,
+    "selected": false,
+    "upgraded": false,
+    "cost": [2,1],
+    "row": 5
+  },
+  "Hematophagy": {
+    "name": "Hematophagy",
+    "locked": true,
+    "selected": false,
+    "upgraded": false,
+    "cost": [1,1],
+    "row": 5
+  },
+  "DreamDevourer": {
+    "name": "Dream Devourer",
+    "locked": true,
+    "selected": false,
+    "upgraded": false,
+    "cost": [1,1],
+    "row": 5
+  },
+  "Silhouette": {
+    "name": "Silhouette",
+    "locked": true,
+    "selected": false,
+    "upgraded": false,
+    "cost": [2,1],
+    "row": 5
+  },
+  "GhostlyDash": {
+    "name": "Ghostly Dash",
+    "locked": true,
+    "selected": false,
+    "upgraded": false,
+    "cost": [1,1],
+    "row": 6
+  },
+  "PureSoul": {
+    "name": "Pure Soul",
+    "locked": true,
+    "selected": false,
+    "upgraded": false,
+    "cost": [1,1],
+    "row": 6
+  },
+  "WarpStrike": {
+    "name": "Warp Strike",
+    "locked": true,
+    "selected": false,
+    "upgraded": false,
+    "cost": [2,1],
+    "row": 6
+  },
+  "ToolInfusion": {
+    "name": "Tool Infusion",
+    "locked": true,
+    "selected": false,
+    "upgraded": false,
+    "cost": [1,1],
+    "row": 6
+  },
+  "ShadowVeil": {
+    "name": "Shadow Veil",
+    "locked": true,
+    "selected": false,
+    "upgraded": false,
+    "cost": [1,1],
+    "row": 6
+  }
+}
+
+
 const costs = {
   "Whisper": [1,1],
   "Defensive Stance": [1,1],
@@ -24,176 +220,3 @@ const costs = {
   "Tool Infusion": [1,1],
   "Shadow Veil": [1,1]
 }
-
-const abilities = {
-  "Whisper": {
-    "locked": false,
-    "selected": 0,
-    "upgraded": 0,
-    "cost": [1,1],
-    "row": 1
-  },
-  "Defensive Stance": {
-    "locked": true,
-    "selected": 0,
-    "upgraded": 0,
-    "cost": [1,1],
-    "row": 2
-  },
-  "Dark Flame": {
-    "locked": true,
-    "selected": 0,
-    "upgraded": 0,
-    "cost": [2,1],
-    "row": 2
-  },
-  "Divination": {
-    "locked": true,
-    "selected": 0,
-    "upgraded": 0,
-    "cost": [1,1],
-    "row": 2
-  },
-  "Bloodsmoke": {
-    "locked": true,
-    "selected": 0,
-    "upgraded": 0,
-    "cost": [2,1],
-    "row": 2
-  },
-  "Chameleon": {
-    "locked": true,
-    "selected": 0,
-    "upgraded": 0,
-    "cost": [1,1],
-    "row": 2
-  },
-  "Mesmerize": {
-    "locked": true,
-    "selected": 0,
-    "upgraded": 0,
-    "cost": [2,1],
-    "row": 3
-  },
-  "Mirage": {
-    "locked": true,
-    "selected": 0,
-    "upgraded": 0,
-    "cost": [1,1],
-    "row": 3
-  },
-  "Enhanced Senses": {
-    "locked": true,
-    "selected": 0,
-    "upgraded": 0,
-    "cost": [1,1],
-    "row": 3
-  },
-  "Wraith": {
-    "locked": true,
-    "selected": 0,
-    "upgraded": 0,
-    "cost": [2,1],
-    "row": 3
-  },
-  "Momentum": {
-    "locked": true,
-    "selected": 0,
-    "upgraded": 0,
-    "cost": [1,1],
-    "row": 3
-  },
-  "Ranged Parry": {
-    "locked": true,
-    "selected": 0,
-    "upgraded": 0,
-    "cost": [1,1],
-    "row": 4
-  },
-  "Shadow Kill": {
-    "locked": true,
-    "selected": 0,
-    "upgraded": 0,
-    "cost": [2,1],
-    "row": 4
-  },
-  "Vampirism": {
-    "locked": true,
-    "selected": 0,
-    "upgraded": 0,
-    "cost": [1,1],
-    "row": 4
-  },
-  "Jumper": {
-    "locked": true,
-    "selected": 0,
-    "upgraded": 0,
-    "cost": [1,1],
-    "row": 4
-  },
-  "Shadow Pull": {
-    "locked": true,
-    "selected": 0,
-    "upgraded": 0,
-    "cost": [2,1],
-    "row": 5
-  },
-  "Hematophagy": {
-    "locked": true,
-    "selected": 0,
-    "upgraded": 0,
-    "cost": [1,1],
-    "row": 5
-  },
-  "Dream Devourer": {
-    "locked": true,
-    "selected": 0,
-    "upgraded": 0,
-    "cost": [1,1],
-    "row": 5
-  },
-  "Silhouette": {
-    "locked": true,
-    "selected": 0,
-    "upgraded": 0,
-    "cost": [2,1],
-    "row": 5
-  },
-  "Ghostly Dash": {
-    "locked": true,
-    "selected": 0,
-    "upgraded": 0,
-    "cost": [1,1],
-    "row": 6
-  },
-  "Pure Soul": {
-    "locked": true,
-    "selected": 0,
-    "upgraded": 0,
-    "cost": [1,1],
-    "row": 6
-  },
-  "Warp Strike": {
-    "locked": true,
-    "selected": 0,
-    "upgraded": 0,
-    "cost": [2,1],
-    "row": 6
-  },
-  "Tool Infusion": {
-    "locked": true,
-    "selected": 0,
-    "upgraded": 0,
-    "cost": [1,1],
-    "row": 6
-  },
-  "Shadow Veil": {
-    "locked": true,
-    "selected": 0,
-    "upgraded": 0,
-    "cost": [1,1],
-    "row": 6
-  }
-}
-
-
