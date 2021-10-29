@@ -1,29 +1,13 @@
-const costs = {
-  "Whisper": [1,1],
-  "Defensive Stance": [1,1],
-  "Dark Flame": [2,1],
-  "Divination": [1,1],
-  "Bloodsmoke": [2,1],
-  "Chameleon": [1,1],
-  "Mesmerize": [2,1],
-  "Mirage": [1,1],
-  "Enhanced Senses": [1,1],
-  "Wraith": [2,1],
-  "Momentum": [1,1],
-  "Ranged Parry": [1,1],
-  "Shadow Kill": [2,1],
-  "Vampirism": [1,1],
-  "Jumper": [1,1],
-  "Shadow Pull": [2,1],
-  "Hematophagy": [1,1],
-  "Dream Devourer": [1,1],
-  "Silhouette": [2,1],
-  "Ghostly Dash": [1,1],
-  "Pure Soul": [1,1],
-  "Warp Strike": [2,1],
-  "Tool Infusion": [1,1],
-  "Shadow Veil": [1,1]
-};
+"use strict";
+
+
+console.log(costs["Whisper"]);
+console.log(abilities["Dark Flame"]);
+console.log(abilities["Whisper"].cost);
+
+
+
+
 
 
 const row1 = document.querySelector(".row1");
@@ -34,6 +18,16 @@ const row5 = document.querySelector(".row5");
 const row6 = document.querySelector(".row6");
 
 const num = document.getElementById("numberHolder");
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -189,11 +183,9 @@ function replaceImgs(status, item) {
 
 disableRows(localStorage.getItem(`aragami2-total`),[row2,row3,row4,row5,row6]);
 function disableRows(currentTotal,rows) {
-
   if( currentTotal == 30) {
     rows.forEach(r => r.classList.add("disable"));
     currentTotal = parseInt(localStorage.getItem(`aragami2-total`));
-
     // console.log("equal 30", currentTotal);
   } 
   // minimum 29
@@ -201,14 +193,11 @@ function disableRows(currentTotal,rows) {
     rows.forEach(r => r.classList.add("disable"));
     row2.classList.remove("disable");
     [...row2.children].forEach(ch => replaceImgs("enable",ch));
-
-
-
     currentTotal = parseInt(localStorage.getItem(`aragami2-total`));
     // console.log("less 30, greater 28", currentTotal);
   }
   // minimum 25
-  if( currentTotal < 28 && currentTotal >= 25) {
+  if( currentTotal < 26 && currentTotal >= 22) {
     rows.forEach(r => r.classList.add("disable"));
     row3.classList.remove("disable");
     row2.classList.remove("disable");
@@ -218,7 +207,7 @@ function disableRows(currentTotal,rows) {
     // console.log("less 28, greater 25", currentTotal);
   }
   // minimum 21
-  if( currentTotal < 25 && currentTotal >= 21) {
+  if( currentTotal < 21 && currentTotal >= 17) {
     rows.forEach(r => r.classList.add("disable"));
     row4.classList.remove("disable");
     row3.classList.remove("disable");
@@ -230,7 +219,7 @@ function disableRows(currentTotal,rows) {
     // console.log("less 25, greater 21", currentTotal);
   }
   // minimum 17
-  if( currentTotal < 21 && currentTotal >= 17) {
+  if( currentTotal < 17 && currentTotal >= 13) {
     rows.forEach(r => r.classList.add("disable"));
     row5.classList.remove("disable");
     row4.classList.remove("disable");
@@ -243,7 +232,7 @@ function disableRows(currentTotal,rows) {
     currentTotal = parseInt(localStorage.getItem(`aragami2-total`));
     // console.log("less 21, greater 17", currentTotal);
   }
-  // minimum 13
+  // minimum 16
   // if( currentTotal < 17 && currentTotal >= 13) {
   if( currentTotal < 17) {
     rows.forEach(r => r.classList.add("disable"));
