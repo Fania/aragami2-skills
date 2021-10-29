@@ -29,28 +29,20 @@ const triggers = document.getElementsByTagName('figure');
     console.log(trigger.id);
     console.dir(trigger);
 
-    setState(trigger,"unlocked");
-
+    setState(trigger,"unlocked",false);
+    // setState(trigger,"selected");
+    // TODO pass state to set state
+    // lock selected upgraded
 
   });
 });
 
-
-function setState(elem,state) {
-  abilities[elem.id].locked = false;
+// 
+function setState(elem,state,bl) {
+  abilities[elem.id][state] = bl;
   elem.classList = [state];
-  changeImg(elem,state);
+  elem.children[0].setAttribute("src",`imgs/${elem.id}-${state}.png`);
 }
-
-
-// todo generic function
-function changeImg(elem,state) {
-
-  const old = elem.children[0].attributes.src.nodeValue;
-  const neww = old.replace(`-${state}`,`-${state}`);
-  elem.children[0].setAttribute("src",neww);
-}
-
 
 
 
