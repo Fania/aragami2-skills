@@ -14,6 +14,11 @@ const row6 = document.querySelector(".row6");
 const num = document.getElementById("numberHolder");
 
 let oldState,newState;
+let total = 30;
+
+const shadowPowers = ["DarkFlame","Bloodsmoke","Mesmerize","Wraith","ShadowKill","ShadowPull","Silhouette","WarpStrike"];
+
+
 
 const triggers = document.getElementsByTagName('figure');
 [...triggers].forEach( trigger => {
@@ -26,9 +31,12 @@ const triggers = document.getElementsByTagName('figure');
 
 function setState(elem) {
   oldState = elem.classList.value;
-  newState = nextState(oldState);
+  newState = nextState(elem.id,oldState);
   elem.classList = [newState];
   setImg(elem,newState);
+
+  console.log(total);
+
 }
 
 function setImg(elem,state) {
@@ -37,25 +45,27 @@ function setImg(elem,state) {
 }
 
 
-function nextState(stateNow) {
+function nextState(skill,stateNow) {
   switch(stateNow) {
     case "locked":
       newState = "unlocked";
       return newState;
     case "unlocked":
+      shadowPowers.includes(skill) ? total -= 2 : total -= 1;
       newState = "selected";
       return newState;
     case "selected":
+      total -= 1;
       newState = "upgraded";
       return newState;
     case "upgraded":
+      shadowPowers.includes(skill) ? total += 3 : total += 2;
       newState = "unlocked";
       return newState;
     default:
       return stateNow;
   }
 }
-
 
 
 
