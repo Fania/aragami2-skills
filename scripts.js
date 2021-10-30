@@ -15,6 +15,7 @@ const num = document.getElementById("numberHolder");
 
 let oldState,newState;
 let total = 30;
+// total ? null : total = 30;
 
 const shadowPowers = ["DarkFlame","Bloodsmoke","Mesmerize","Wraith","ShadowKill","ShadowPull","Silhouette","WarpStrike"];
 
@@ -31,6 +32,7 @@ const triggers = document.getElementsByTagName('figure');
 
 function setState(elem) {
   oldState = elem.classList.value;
+  console.log(oldState);
   newState = nextState(elem.id,oldState);
   elem.classList = [newState];
   setImg(elem,newState);
@@ -66,10 +68,47 @@ function nextState(skill,stateNow) {
 }
 
 
-
 function updateInterface(total){
   num.innerHTML = total;
+  toggleRow(total);
 }
+
+function updateRowChildren(row){
+  [...row.children].map(x => {
+    if(x.classList.contains("locked")) {
+      setImg(x,"unlocked");
+    }
+  });
+}
+
+function toggleRow(total) {
+  switch(true) {
+    case(total < 30 && total >= 28):
+      updateRowChildren(row2);
+      row2.classList.remove("disable");
+      break;
+    case(total < 26 && total >= 22):
+      updateRowChildren(row3);
+      row3.classList.remove("disable");
+      break;
+    case(total < 22 && total >= 18):
+      updateRowChildren(row4);
+      row4.classList.remove("disable");
+      break;
+    case(total < 18 && total >= 14):
+      updateRowChildren(row5);
+      row5.classList.remove("disable");
+      break;
+    case(total < 14):
+      updateRowChildren(row6);
+      row6.classList.remove("disable");
+      break;
+  }
+}
+
+
+
+
 
 
 
