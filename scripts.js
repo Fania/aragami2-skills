@@ -34,9 +34,7 @@ function setState(elem) {
   newState = nextState(elem.id,oldState);
   elem.classList = [newState];
   setImg(elem,newState);
-
-  console.log(total);
-
+  updateInterface(total);
 }
 
 function setImg(elem,state) {
@@ -69,7 +67,9 @@ function nextState(skill,stateNow) {
 
 
 
-
+function updateInterface(total){
+  num.innerHTML = total;
+}
 
 
 
