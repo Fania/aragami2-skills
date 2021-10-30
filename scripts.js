@@ -1,14 +1,8 @@
 "use strict";
 
 
-console.log(costs["Whisper"]);
-console.log(abilities["Dark Flame"]);
-console.log(abilities["Whisper"].cost);
-
-
-
-
-
+// console.log(abilities["DarkFlame"]);
+// console.log(abilities["Whisper"].cost);
 
 const row1 = document.querySelector(".row1");
 const row2 = document.querySelector(".row2");
@@ -19,37 +13,48 @@ const row6 = document.querySelector(".row6");
 
 const num = document.getElementById("numberHolder");
 
-
-
+let oldState,newState;
 
 const triggers = document.getElementsByTagName('figure');
 [...triggers].forEach( trigger => {
   trigger.addEventListener('click', ()=> { 
-
-    console.log(trigger.id);
-    console.dir(trigger);
-
-    setState(trigger,"unlocked",false);
-    // setState(trigger,"selected");
-    // TODO pass state to set state
-    // lock selected upgraded
-
+    setState(trigger);
   });
 });
 
-// 
-function setState(elem,state,bl) {
-  abilities[elem.id][state] = bl;
+
+
+function setState(elem) {
+  oldState = elem.classList.value;
+  newState = nextState(oldState);
+  elem.classList = [newState];
+  setImg(elem,newState);
+}
+
+function setImg(elem,state) {
   elem.classList = [state];
   elem.children[0].setAttribute("src",`imgs/${elem.id}-${state}.png`);
 }
 
 
-
-
-
-
-
+function nextState(stateNow) {
+  switch(stateNow) {
+    case "locked":
+      newState = "unlocked";
+      return newState;
+    case "unlocked":
+      newState = "selected";
+      return newState;
+    case "selected":
+      newState = "upgraded";
+      return newState;
+    case "upgraded":
+      newState = "unlocked";
+      return newState;
+    default:
+      return stateNow;
+  }
+}
 
 
 
