@@ -32,7 +32,7 @@ const triggers = document.getElementsByTagName('figure');
 
 function setState(elem) {
   oldState = elem.classList.value;
-  console.log(oldState);
+  // console.log(oldState);
   newState = nextState(elem.id,oldState);
   elem.classList = [newState];
   setImg(elem,newState);

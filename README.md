@@ -1,6 +1,5 @@
 # Aragami 2 Skills Calculator
 
-
 *Tier 6*
 - ghostly dash: 1, passive
 - pure soul: 1, passive
@@ -36,3 +35,13 @@
 
 *Tier 1*
 - whisper: 0, shadow
+
+
+
+## TODO
+
+- [ ] load from localStorage 
+- [ ] load from bookmarks
+- [ ] save to localStorage 
+- [ ] reset button
+- [ ] share button
