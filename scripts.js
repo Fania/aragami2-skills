@@ -75,6 +75,7 @@ function updateInterface(total){
 
 function updateRowChildren(row){
   [...row.children].map(x => {
+    console.log({row,x});
     if(x.classList.contains("locked")) {
       setImg(x,"unlocked");
     }
@@ -82,26 +83,27 @@ function updateRowChildren(row){
 }
 
 function toggleRow(total) {
+  console.log(total);
   switch(true) {
     case(total < 30 && total >= 28):
       updateRowChildren(row2);
-      row2.classList.remove("disable");
+      row2.classList.remove("disabled");
       break;
     case(total < 26 && total >= 22):
       updateRowChildren(row3);
-      row3.classList.remove("disable");
+      row3.classList.remove("disabled");
       break;
     case(total < 22 && total >= 18):
       updateRowChildren(row4);
-      row4.classList.remove("disable");
+      row4.classList.remove("disabled");
       break;
     case(total < 18 && total >= 14):
       updateRowChildren(row5);
-      row5.classList.remove("disable");
+      row5.classList.remove("disabled");
       break;
     case(total < 14):
       updateRowChildren(row6);
-      row6.classList.remove("disable");
+      row6.classList.remove("disabled");
       break;
   }
 }

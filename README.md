@@ -41,6 +41,7 @@
 
 ## TODO
 
+- [ ] reset lock images after total count goes down
 - [ ] load from localStorage 
 - [ ] load from bookmarks
 - [ ] save to localStorage 
