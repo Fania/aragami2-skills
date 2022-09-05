@@ -39,8 +39,18 @@ const num = document.getElementById("numberHolder");
 
 
 // FIRST LOAD
+// check for params in url
 const params = location.search;
 if(params) { loadBookmark(params); }
+
+// set localstorage if empty
+
+let skillpoints = localStorage.getItem("aragami2-total");
+// skillpoints ? null : skillpoints = 30;
+if(skillpoints == null) {
+  skillpoints = 30;
+  localStorage.setItem(`aragami2-total`, 30);
+}
 
 function loadBookmark(params) {
   const keyValueStrings = (params.slice(1)).split('&');
@@ -61,9 +71,6 @@ function loadBookmark(params) {
 
 
 
-let skillpoints = localStorage.getItem("aragami2-total");
-skillpoints ? null : skillpoints = 30;
-
 
 const resetButton = document.getElementById('resetButton');
 resetButton.addEventListener('click', ()=> { 
@@ -74,11 +81,17 @@ resetButton.addEventListener('click', ()=> {
 });
 
 
+// num-name-state.png
+// locked - selected - unlocked - upgraded
+
 const triggers = document.getElementsByTagName('figure');
 [...triggers].forEach( trig => {
   trig.addEventListener('click', ()=> { 
     const skill = trig.lastElementChild.firstElementChild.innerHTML;
     localStorage.setItem(`aragami2-total`, parseInt(skillpoints));
+
+    disableRows(localStorage.getItem(`aragami2-total`),[row2,row3,row4,row5,row6]);
+
     // FIRST CLICK (UNLOCKED)
     if(trig.classList.length == 0){
       // change image
@@ -86,6 +99,7 @@ const triggers = document.getElementsByTagName('figure');
       const old = trig.children[0].attributes.src.nodeValue;
       const neww = old.replace("-locked","-selected");
       trig.children[0].setAttribute("src",neww);
+      // replaceImgs("select",neww);
       // add points to storage
       localStorage.setItem(`aragami2-${skill}`, costs[skill][0]);
       // add points to totals
@@ -100,6 +114,7 @@ const triggers = document.getElementsByTagName('figure');
       const old = trig.children[0].attributes.src.nodeValue;
       const neww = old.replace("-selected","-upgraded");
       trig.children[0].setAttribute("src",neww);
+      // replaceImgs("upgrade",neww);
       // add points to storage
       localStorage.setItem(`aragami2-up-${skill}`, costs[skill][1]);
       // add points to totals
@@ -115,8 +130,10 @@ const triggers = document.getElementsByTagName('figure');
       let neww = "";
       if(old.endsWith("-selected")) {
         neww = old.replace("-selected","-locked");
+        // replaceImgs("lock",neww);
       } else {
         neww = old.replace("-upgraded","-locked");
+        // replaceImgs("lock",neww);
       }
       trig.children[0].setAttribute("src",neww);
       // remove points from storage
@@ -175,10 +192,17 @@ function loadFromStorage() {
 function replaceImgs(status, item) {
   const old = item.children[0].attributes.src.nodeValue;
   let neww = "";
-  if(status === "enable") {
+  if(status === "unlock") {
     neww = old.replace("-locked","-unlocked");
-  } else {
-    neww = old.replace("-unlocked","-locked");
+  } 
+  if(status === "select"){
+    neww = old.replace("-unlocked","-selected");
+  }
+  if(status === "upgrade"){
+    neww = old.replace("-selected","-upgraded");
+  }
+  if(status === "lock"){
+    neww = old.replace("-upgraded","-locked");
   }
 
   // console.log(item.children[0].classList);
@@ -186,79 +210,82 @@ function replaceImgs(status, item) {
 }
 
 
-
+// initially all rows above the first one are disabled
 disableRows(localStorage.getItem(`aragami2-total`),[row2,row3,row4,row5,row6]);
 function disableRows(currentTotal,rows) {
+  // but then enable the rows bit by bit as the currentTotal reduces over time
+  console.log(currentTotal);
 
   if( currentTotal == 30) {
     rows.forEach(r => r.classList.add("disable"));
+    [...row2.children].forEach(ch => replaceImgs("lock",ch));
+    [...row3.children].forEach(ch => replaceImgs("lock",ch));
+    [...row4.children].forEach(ch => replaceImgs("lock",ch));
+    [...row5.children].forEach(ch => replaceImgs("lock",ch));
+    [...row6.children].forEach(ch => replaceImgs("lock",ch));
     currentTotal = parseInt(localStorage.getItem(`aragami2-total`));
-
-    // console.log("equal 30", currentTotal);
+    console.log("equal 30", currentTotal);
   } 
   // minimum 29
   if( currentTotal < 30 && currentTotal >= 28) {
-    rows.forEach(r => r.classList.add("disable"));
+    // rows.forEach(r => r.classList.add("disable"));
     row2.classList.remove("disable");
-    [...row2.children].forEach(ch => replaceImgs("enable",ch));
-
-
-
+    [...row2.children].forEach(ch => replaceImgs("unlock",ch));
     currentTotal = parseInt(localStorage.getItem(`aragami2-total`));
-    // console.log("less 30, greater 28", currentTotal);
+    console.log("less 30, greater 28", currentTotal);
   }
   // minimum 25
   if( currentTotal < 28 && currentTotal >= 25) {
-    rows.forEach(r => r.classList.add("disable"));
-    row3.classList.remove("disable");
+    // rows.forEach(r => r.classList.add("disable"));
     row2.classList.remove("disable");
-    [...row3.children].forEach(ch => replaceImgs("enable",ch));
-    [...row2.children].forEach(ch => replaceImgs("enable",ch));
+    row3.classList.remove("disable");
+    [...row2.children].forEach(ch => replaceImgs("unlock",ch));
+    [...row3.children].forEach(ch => replaceImgs("unlock",ch));
     currentTotal = parseInt(localStorage.getItem(`aragami2-total`));
-    // console.log("less 28, greater 25", currentTotal);
+    console.log("less 28, greater 25", currentTotal);
   }
   // minimum 21
   if( currentTotal < 25 && currentTotal >= 21) {
-    rows.forEach(r => r.classList.add("disable"));
-    row4.classList.remove("disable");
-    row3.classList.remove("disable");
+    // rows.forEach(r => r.classList.add("disable"));
     row2.classList.remove("disable");
-    [...row4.children].forEach(ch => replaceImgs("enable",ch));
-    [...row3.children].forEach(ch => replaceImgs("enable",ch));
-    [...row2.children].forEach(ch => replaceImgs("enable",ch));
+    row3.classList.remove("disable");
+    row4.classList.remove("disable");
+    [...row2.children].forEach(ch => replaceImgs("unlock",ch));
+    [...row3.children].forEach(ch => replaceImgs("unlock",ch));
+    [...row4.children].forEach(ch => replaceImgs("unlock",ch));
     currentTotal = parseInt(localStorage.getItem(`aragami2-total`));
-    // console.log("less 25, greater 21", currentTotal);
+    console.log("less 25, greater 21", currentTotal);
   }
   // minimum 17
   if( currentTotal < 21 && currentTotal >= 17) {
-    rows.forEach(r => r.classList.add("disable"));
-    row5.classList.remove("disable");
-    row4.classList.remove("disable");
-    row3.classList.remove("disable");
+    // rows.forEach(r => r.classList.add("disable"));
     row2.classList.remove("disable");
-    [...row5.children].forEach(ch => replaceImgs("enable",ch));
-    [...row4.children].forEach(ch => replaceImgs("enable",ch));
-    [...row3.children].forEach(ch => replaceImgs("enable",ch));
-    [...row2.children].forEach(ch => replaceImgs("enable",ch));
+    row3.classList.remove("disable");
+    row4.classList.remove("disable");
+    row5.classList.remove("disable");
+    [...row2.children].forEach(ch => replaceImgs("unlock",ch));
+    [...row3.children].forEach(ch => replaceImgs("unlock",ch));
+    [...row4.children].forEach(ch => replaceImgs("unlock",ch));
+    [...row5.children].forEach(ch => replaceImgs("unlock",ch));
     currentTotal = parseInt(localStorage.getItem(`aragami2-total`));
-    // console.log("less 21, greater 17", currentTotal);
+    console.log("less 21, greater 17", currentTotal);
   }
   // minimum 13
   // if( currentTotal < 17 && currentTotal >= 13) {
   if( currentTotal < 17) {
-    rows.forEach(r => r.classList.add("disable"));
-    row6.classList.remove("disable");
-    row5.classList.remove("disable");
-    row4.classList.remove("disable");
-    row3.classList.remove("disable");
+    // rows.forEach(r => r.classList.add("disable"));
     row2.classList.remove("disable");
-    [...row6.children].forEach(ch => replaceImgs("enable",ch));
-    [...row5.children].forEach(ch => replaceImgs("enable",ch));
-    [...row4.children].forEach(ch => replaceImgs("enable",ch));
-    [...row3.children].forEach(ch => replaceImgs("enable",ch));
-    [...row2.children].forEach(ch => replaceImgs("enable",ch));
+    row3.classList.remove("disable");
+    row4.classList.remove("disable");
+    row5.classList.remove("disable");
+    row6.classList.remove("disable");
+    [...row2.children].forEach(ch => replaceImgs("unlock",ch));
+    [...row3.children].forEach(ch => replaceImgs("unlock",ch));
+    [...row4.children].forEach(ch => replaceImgs("unlock",ch));
+    [...row5.children].forEach(ch => replaceImgs("unlock",ch));
+    [...row6.children].forEach(ch => replaceImgs("unlock",ch));
     currentTotal = parseInt(localStorage.getItem(`aragami2-total`));
-    // console.log("less 17, greater 13", currentTotal);
+    console.log("less 17, greater 13", currentTotal);
   }
   // if( currentTotal == 0) {
   //   rows.forEach(r => r.classList.add("disable"));
