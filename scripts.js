@@ -87,10 +87,10 @@ resetButton.addEventListener('click', ()=> {
 const triggers = document.getElementsByTagName('figure');
 [...triggers].forEach( trig => {
   trig.addEventListener('click', ()=> { 
+    console.log(trig);
+
     const skill = trig.lastElementChild.firstElementChild.innerHTML;
     localStorage.setItem(`aragami2-total`, parseInt(skillpoints));
-
-    disableRows(localStorage.getItem(`aragami2-total`),[row2,row3,row4,row5,row6]);
 
     // FIRST CLICK (UNLOCKED)
     if(trig.classList.length == 0){
@@ -98,6 +98,8 @@ const triggers = document.getElementsByTagName('figure');
       trig.classList.add("first");
       const old = trig.children[0].attributes.src.nodeValue;
       const neww = old.replace("-locked","-selected");
+      console.log(trig.children[0]);
+      console.log(neww);
       trig.children[0].setAttribute("src",neww);
       // replaceImgs("select",neww);
       // add points to storage
@@ -155,12 +157,25 @@ const triggers = document.getElementsByTagName('figure');
 
 loadFromStorage();
 function loadFromStorage() {
+
+
+  let currentTotal = localStorage.getItem(`aragami2-total`);
+  if( currentTotal == 30) {
+    [...row2.children].forEach(ch => replaceImgs("unlock",ch));
+    [...row3.children].forEach(ch => replaceImgs("lock",ch));
+    [...row4.children].forEach(ch => replaceImgs("lock",ch));
+    [...row5.children].forEach(ch => replaceImgs("lock",ch));
+    [...row6.children].forEach(ch => replaceImgs("lock",ch));
+  }
+
+
+
   // loop through entries from storage
   const skills = Object.keys(localStorage).sort(); // alphabetic sort
   skills.forEach( key => {
     const newKey = key.replace("aragami2-","").replace(" ","");
     const item = document.getElementById(newKey);
-    // FIRST CLICK (UNLOCKED)
+    // FIRST CLICK (SELECTED)
     if(!newKey.startsWith("up-")){
       if(newKey != "total") {
         item.classList.add("first");
@@ -214,15 +229,15 @@ function replaceImgs(status, item) {
 disableRows(localStorage.getItem(`aragami2-total`),[row2,row3,row4,row5,row6]);
 function disableRows(currentTotal,rows) {
   // but then enable the rows bit by bit as the currentTotal reduces over time
-  console.log(currentTotal);
+  console.log(currentTotal, typeof currentTotal);
 
   if( currentTotal == 30) {
     rows.forEach(r => r.classList.add("disable"));
-    [...row2.children].forEach(ch => replaceImgs("lock",ch));
-    [...row3.children].forEach(ch => replaceImgs("lock",ch));
-    [...row4.children].forEach(ch => replaceImgs("lock",ch));
-    [...row5.children].forEach(ch => replaceImgs("lock",ch));
-    [...row6.children].forEach(ch => replaceImgs("lock",ch));
+    // [...row2.children].forEach(ch => replaceImgs("lock",ch));
+    // [...row3.children].forEach(ch => replaceImgs("lock",ch));
+    // [...row4.children].forEach(ch => replaceImgs("lock",ch));
+    // [...row5.children].forEach(ch => replaceImgs("lock",ch));
+    // [...row6.children].forEach(ch => replaceImgs("lock",ch));
     currentTotal = parseInt(localStorage.getItem(`aragami2-total`));
     console.log("equal 30", currentTotal);
   } 
@@ -230,7 +245,7 @@ function disableRows(currentTotal,rows) {
   if( currentTotal < 30 && currentTotal >= 28) {
     // rows.forEach(r => r.classList.add("disable"));
     row2.classList.remove("disable");
-    [...row2.children].forEach(ch => replaceImgs("unlock",ch));
+    // [...row2.children].forEach(ch => replaceImgs("unlock",ch));
     currentTotal = parseInt(localStorage.getItem(`aragami2-total`));
     console.log("less 30, greater 28", currentTotal);
   }
@@ -239,8 +254,8 @@ function disableRows(currentTotal,rows) {
     // rows.forEach(r => r.classList.add("disable"));
     row2.classList.remove("disable");
     row3.classList.remove("disable");
-    [...row2.children].forEach(ch => replaceImgs("unlock",ch));
-    [...row3.children].forEach(ch => replaceImgs("unlock",ch));
+    // [...row2.children].forEach(ch => replaceImgs("unlock",ch));
+    // [...row3.children].forEach(ch => replaceImgs("unlock",ch));
     currentTotal = parseInt(localStorage.getItem(`aragami2-total`));
     console.log("less 28, greater 25", currentTotal);
   }
@@ -250,9 +265,9 @@ function disableRows(currentTotal,rows) {
     row2.classList.remove("disable");
     row3.classList.remove("disable");
     row4.classList.remove("disable");
-    [...row2.children].forEach(ch => replaceImgs("unlock",ch));
-    [...row3.children].forEach(ch => replaceImgs("unlock",ch));
-    [...row4.children].forEach(ch => replaceImgs("unlock",ch));
+    // [...row2.children].forEach(ch => replaceImgs("unlock",ch));
+    // [...row3.children].forEach(ch => replaceImgs("unlock",ch));
+    // [...row4.children].forEach(ch => replaceImgs("unlock",ch));
     currentTotal = parseInt(localStorage.getItem(`aragami2-total`));
     console.log("less 25, greater 21", currentTotal);
   }
@@ -263,10 +278,10 @@ function disableRows(currentTotal,rows) {
     row3.classList.remove("disable");
     row4.classList.remove("disable");
     row5.classList.remove("disable");
-    [...row2.children].forEach(ch => replaceImgs("unlock",ch));
-    [...row3.children].forEach(ch => replaceImgs("unlock",ch));
-    [...row4.children].forEach(ch => replaceImgs("unlock",ch));
-    [...row5.children].forEach(ch => replaceImgs("unlock",ch));
+    // [...row2.children].forEach(ch => replaceImgs("unlock",ch));
+    // [...row3.children].forEach(ch => replaceImgs("unlock",ch));
+    // [...row4.children].forEach(ch => replaceImgs("unlock",ch));
+    // [...row5.children].forEach(ch => replaceImgs("unlock",ch));
     currentTotal = parseInt(localStorage.getItem(`aragami2-total`));
     console.log("less 21, greater 17", currentTotal);
   }
@@ -279,11 +294,11 @@ function disableRows(currentTotal,rows) {
     row4.classList.remove("disable");
     row5.classList.remove("disable");
     row6.classList.remove("disable");
-    [...row2.children].forEach(ch => replaceImgs("unlock",ch));
-    [...row3.children].forEach(ch => replaceImgs("unlock",ch));
-    [...row4.children].forEach(ch => replaceImgs("unlock",ch));
-    [...row5.children].forEach(ch => replaceImgs("unlock",ch));
-    [...row6.children].forEach(ch => replaceImgs("unlock",ch));
+    // [...row2.children].forEach(ch => replaceImgs("unlock",ch));
+    // [...row3.children].forEach(ch => replaceImgs("unlock",ch));
+    // [...row4.children].forEach(ch => replaceImgs("unlock",ch));
+    // [...row5.children].forEach(ch => replaceImgs("unlock",ch));
+    // [...row6.children].forEach(ch => replaceImgs("unlock",ch));
     currentTotal = parseInt(localStorage.getItem(`aragami2-total`));
     console.log("less 17, greater 13", currentTotal);
   }
