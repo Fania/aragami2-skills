@@ -32,6 +32,7 @@ const row3 = document.querySelector(".row3");
 const row4 = document.querySelector(".row4");
 const row5 = document.querySelector(".row5");
 const row6 = document.querySelector(".row6");
+const rows = [row2,row3,row4,row5,row6];
 
 const num = document.getElementById("numberHolder");
 
@@ -44,13 +45,15 @@ const params = location.search;
 if(params) { loadBookmark(params); }
 
 // set localstorage if empty
-
 let skillpoints = localStorage.getItem("aragami2-total");
 // skillpoints ? null : skillpoints = 30;
 if(skillpoints == null) {
   skillpoints = 30;
   localStorage.setItem(`aragami2-total`, 30);
 }
+
+// make sure rows are disabled on first load.
+disableRows(rows);
 
 function loadBookmark(params) {
   const keyValueStrings = (params.slice(1)).split('&');
@@ -69,17 +72,16 @@ function loadBookmark(params) {
 
 
 
-
-
-
 const resetButton = document.getElementById('resetButton');
 resetButton.addEventListener('click', ()=> { 
   localStorage.clear();
   location.search = "";
-  // console.log(location.url.toString());
   location.reload();
 });
 
+
+
+// MAIN TRIGGERS FOR EACH CLICK
 
 // num-name-state.png
 // locked - selected - unlocked - upgraded
@@ -147,7 +149,46 @@ const triggers = document.getElementsByTagName('figure');
       num.innerHTML = "";
       num.innerHTML = localStorage.getItem("aragami2-total");
     }
-    disableRows(localStorage.getItem(`aragami2-total`),[row2,row3,row4,row5,row6]);
+
+    // DISABLE ROWS if necessary on each click
+    let currentTotal = localStorage.getItem(`aragami2-total`);
+    // console.log(currentTotal, typeof currentTotal);
+    if( currentTotal == 30) {
+      disableRows(rows);
+      currentTotal = parseInt(localStorage.getItem(`aragami2-total`));
+      console.log("equal 30", currentTotal);
+    } 
+    // minimum 29
+    if( currentTotal < 30 && currentTotal >= 28) {
+      enableRow(row2);
+      currentTotal = parseInt(localStorage.getItem(`aragami2-total`));
+      console.log("less 30, greater 28", currentTotal);
+    }
+    // minimum 25
+    if( currentTotal < 28 && currentTotal >= 25) {
+      enableRows([row2,row3]);
+      currentTotal = parseInt(localStorage.getItem(`aragami2-total`));
+      console.log("less 28, greater 25", currentTotal);
+    }
+    // minimum 21
+    if( currentTotal < 25 && currentTotal >= 21) {
+      enableRows([row2,row3,row4]);
+      currentTotal = parseInt(localStorage.getItem(`aragami2-total`));
+      console.log("less 25, greater 21", currentTotal);
+    }
+    // minimum 17
+    if( currentTotal < 21 && currentTotal >= 17) {
+      enableRows([row2,row3,row4,row5]);
+      currentTotal = parseInt(localStorage.getItem(`aragami2-total`));
+      console.log("less 21, greater 17", currentTotal);
+    }
+    // minimum 13
+    // if( currentTotal < 17 && currentTotal >= 13) {
+    if( currentTotal < 17) {
+      enableRows([row2,row3,row4,row5]);
+      currentTotal = parseInt(localStorage.getItem(`aragami2-total`));
+      console.log("less 17, greater 13", currentTotal);
+    }
   });
 });
 
@@ -157,19 +198,6 @@ const triggers = document.getElementsByTagName('figure');
 
 loadFromStorage();
 function loadFromStorage() {
-
-
-  let currentTotal = localStorage.getItem(`aragami2-total`);
-  if( currentTotal == 30) {
-    [...row2.children].forEach(ch => replaceImgs("unlock",ch));
-    [...row3.children].forEach(ch => replaceImgs("lock",ch));
-    [...row4.children].forEach(ch => replaceImgs("lock",ch));
-    [...row5.children].forEach(ch => replaceImgs("lock",ch));
-    [...row6.children].forEach(ch => replaceImgs("lock",ch));
-  }
-
-
-
   // loop through entries from storage
   const skills = Object.keys(localStorage).sort(); // alphabetic sort
   skills.forEach( key => {
@@ -219,130 +247,26 @@ function replaceImgs(status, item) {
   if(status === "lock"){
     neww = old.replace("-upgraded","-locked");
   }
-
   // console.log(item.children[0].classList);
   item.children[0].setAttribute("src",neww);
 }
 
 
-// initially all rows above the first one are disabled
-disableRows(localStorage.getItem(`aragami2-total`),[row2,row3,row4,row5,row6]);
-function disableRows(currentTotal,rows) {
-  // but then enable the rows bit by bit as the currentTotal reduces over time
-  console.log(currentTotal, typeof currentTotal);
 
-  if( currentTotal == 30) {
-    rows.forEach(r => r.classList.add("disable"));
-    // [...row2.children].forEach(ch => replaceImgs("lock",ch));
-    // [...row3.children].forEach(ch => replaceImgs("lock",ch));
-    // [...row4.children].forEach(ch => replaceImgs("lock",ch));
-    // [...row5.children].forEach(ch => replaceImgs("lock",ch));
-    // [...row6.children].forEach(ch => replaceImgs("lock",ch));
-    currentTotal = parseInt(localStorage.getItem(`aragami2-total`));
-    console.log("equal 30", currentTotal);
-  } 
-  // minimum 29
-  if( currentTotal < 30 && currentTotal >= 28) {
-    // rows.forEach(r => r.classList.add("disable"));
-    row2.classList.remove("disable");
-    // [...row2.children].forEach(ch => replaceImgs("unlock",ch));
-    currentTotal = parseInt(localStorage.getItem(`aragami2-total`));
-    console.log("less 30, greater 28", currentTotal);
-  }
-  // minimum 25
-  if( currentTotal < 28 && currentTotal >= 25) {
-    // rows.forEach(r => r.classList.add("disable"));
-    row2.classList.remove("disable");
-    row3.classList.remove("disable");
-    // [...row2.children].forEach(ch => replaceImgs("unlock",ch));
-    // [...row3.children].forEach(ch => replaceImgs("unlock",ch));
-    currentTotal = parseInt(localStorage.getItem(`aragami2-total`));
-    console.log("less 28, greater 25", currentTotal);
-  }
-  // minimum 21
-  if( currentTotal < 25 && currentTotal >= 21) {
-    // rows.forEach(r => r.classList.add("disable"));
-    row2.classList.remove("disable");
-    row3.classList.remove("disable");
-    row4.classList.remove("disable");
-    // [...row2.children].forEach(ch => replaceImgs("unlock",ch));
-    // [...row3.children].forEach(ch => replaceImgs("unlock",ch));
-    // [...row4.children].forEach(ch => replaceImgs("unlock",ch));
-    currentTotal = parseInt(localStorage.getItem(`aragami2-total`));
-    console.log("less 25, greater 21", currentTotal);
-  }
-  // minimum 17
-  if( currentTotal < 21 && currentTotal >= 17) {
-    // rows.forEach(r => r.classList.add("disable"));
-    row2.classList.remove("disable");
-    row3.classList.remove("disable");
-    row4.classList.remove("disable");
-    row5.classList.remove("disable");
-    // [...row2.children].forEach(ch => replaceImgs("unlock",ch));
-    // [...row3.children].forEach(ch => replaceImgs("unlock",ch));
-    // [...row4.children].forEach(ch => replaceImgs("unlock",ch));
-    // [...row5.children].forEach(ch => replaceImgs("unlock",ch));
-    currentTotal = parseInt(localStorage.getItem(`aragami2-total`));
-    console.log("less 21, greater 17", currentTotal);
-  }
-  // minimum 13
-  // if( currentTotal < 17 && currentTotal >= 13) {
-  if( currentTotal < 17) {
-    // rows.forEach(r => r.classList.add("disable"));
-    row2.classList.remove("disable");
-    row3.classList.remove("disable");
-    row4.classList.remove("disable");
-    row5.classList.remove("disable");
-    row6.classList.remove("disable");
-    // [...row2.children].forEach(ch => replaceImgs("unlock",ch));
-    // [...row3.children].forEach(ch => replaceImgs("unlock",ch));
-    // [...row4.children].forEach(ch => replaceImgs("unlock",ch));
-    // [...row5.children].forEach(ch => replaceImgs("unlock",ch));
-    // [...row6.children].forEach(ch => replaceImgs("unlock",ch));
-    currentTotal = parseInt(localStorage.getItem(`aragami2-total`));
-    console.log("less 17, greater 13", currentTotal);
-  }
-  // if( currentTotal == 0) {
-  //   rows.forEach(r => r.classList.add("disable"));
-  //   row1.classList.add("disable");
-  //   currentTotal = parseInt(localStorage.getItem(`aragami2-total`));
-  //   console.log("equals 0", currentTotal);
-  // }
+function disableRow(row) {
+  console.log("disabling", row);
+  row.classList.add("disable");
 }
-
-
-
-  // const wh = document.querySelector("#Whisper");
-
-  // const ds = document.querySelector("#DefensiveStance");
-  // const df = document.querySelector("#DarkFlame");
-  // const dv = document.querySelector("#Divination");
-  // const bs = document.querySelector("#Bloodsmoke");
-  // const ch = document.querySelector("#Chameleon");
-
-  // const mz = document.querySelector("#Mesmerize");
-  // const mr = document.querySelector("#Mirage");
-  // const es = document.querySelector("#EnhancedSenses");
-  // const wr = document.querySelector("#Wraith");
-
-  // const mt = document.querySelector("#Momentum");
-  // const rp = document.querySelector("#RangedParry");
-  // const sk = document.querySelector("#ShadowKill");
-  // const vp = document.querySelector("#Vampirism");
-  // const jp = document.querySelector("#Jumper");
-
-  // const sp = document.querySelector("#ShadowPull");
-  // const hp = document.querySelector("#Hematophagy");
-  // const dd = document.querySelector("#DreamDevourer");
-  // const st = document.querySelector("#Silhouette");
-
-  // const gd = document.querySelector("#GhostlyDash");
-  // const ps = document.querySelector("#PureSoul");
-  // const ws = document.querySelector("#WarpStrike");
-  // const ti = document.querySelector("#ToolInfusion");
-  // const sv = document.querySelector("#ShadowVeil");
-
-
+function enableRow(row) {
+  console.log("enabling", row);
+  row.classList.remove("disable");
+}
+function disableRows(rows) {
+  rows.forEach(r => disableRow(r));
+}
+function enableRows(rows) {
+  rows.forEach(r => enableRow(r));
+}
 
 
 
@@ -372,7 +296,4 @@ shareButton.addEventListener('click', ()=> {
   location = bookmark;
 
 });
-
-
-
 
