@@ -149,6 +149,8 @@ const triggers = document.getElementsByTagName('figure');
     if( currentTotal < 30 && currentTotal >= 28) {
       enableRow(row2);
       unlockRow(row2);
+      disableRows([row3,row4,row5,row6]);
+      [row3,row4,row5,row6].forEach(r => lockRow(r));
       currentTotal = parseInt(localStorage.getItem(`aragami2-total`));
       console.log("less 30, greater= 28", currentTotal);
     }
@@ -156,6 +158,8 @@ const triggers = document.getElementsByTagName('figure');
     if( currentTotal < 28 && currentTotal >= 25) {
       enableRows([row2,row3]);
       [row2,row3].forEach(r => unlockRow(r));
+      disableRows([row4,row5,row6]);
+      [row4,row5,row6].forEach(r => lockRow(r));
       currentTotal = parseInt(localStorage.getItem(`aragami2-total`));
       console.log("less 28, greater= 25", currentTotal);
     }
@@ -163,6 +167,8 @@ const triggers = document.getElementsByTagName('figure');
     if( currentTotal < 25 && currentTotal >= 21) {
       enableRows([row2,row3,row4]);
       [row2,row3,row4].forEach(r => unlockRow(r));
+      disableRows([row5,row6]);
+      [row5,row6].forEach(r => lockRow(r));
       currentTotal = parseInt(localStorage.getItem(`aragami2-total`));
       console.log("less 25, greater= 21", currentTotal);
     }
@@ -170,6 +176,8 @@ const triggers = document.getElementsByTagName('figure');
     if( currentTotal < 21 && currentTotal >= 17) {
       enableRows([row2,row3,row4,row5]);
       [row2,row3,row4,row5].forEach(r => unlockRow(r));
+      disableRow(row6);
+      lockRow(row6);
       currentTotal = parseInt(localStorage.getItem(`aragami2-total`));
       console.log("less 21, greater= 17", currentTotal);
     }
@@ -259,14 +267,14 @@ function replaceImgs(status, item) {
 
 // LOCKED -> UNLOCKED
 function unlockRow(row) {
-  console.log("unlocking",row);
+  // console.log("unlocking",row);
   for (let r of row.children) {
     replaceImgs("unlock", r);
   }
 }
 // UNLOCKED -> LOCKED
 function lockRow(row) {
-  console.log("locking",row);
+  // console.log("locking",row);
   for (let r of row.children) {
     replaceImgs("lock", r);
   }
@@ -281,7 +289,6 @@ function enableRow(row) {
 function disableRows(rows) {
   console.log("disabling", rows);
   rows.forEach(r => {
-    
     disableRow(r)
   });
 }
